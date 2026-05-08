@@ -1,0 +1,301 @@
+-- At the top of the xmv file add:
+@TIME_DOMAIN continuous
+
+MODULE "`init.and.main"("!{%memaddr}", "!{fan_status}", "!{scheduler_state}", "!{%mem.0}", "!{&temp_queue}")
+VAR
+  "!{$(in_main#1)<$(in_sensor_task#0)<&temp>>}" : integer;
+  "!{$(in_main#1)<$(in_sensor_task#0)<$(in_read_sensor#1)<temp>>>}" : real;
+  "!pc[0]" : boolean;
+  "!pc[1]" : boolean;
+  "!pc[2]" : boolean;
+  "!pc[3]" : boolean;
+IVAR
+  "!{$(in_main#1)<$(in_sensor_task#0)<$(in_read_sensor#1)<h#<temp>>>>}" : real;
+  "%{fan_status}#2" : boolean;
+  "%{scheduler_state}#2" : integer;
+DEFINE
+  __d0 := TRUE;
+  __d92 := ! "!pc[3]";
+  __d90 := ! "!pc[2]";
+  __d88 := ! "!pc[1]";
+  __d87 := ! "!pc[0]";
+  __d89 := __d87 & __d88;
+  __d91 := __d89 & __d90;
+  __d93 := __d91 & __d92;
+  __d71 := "!{scheduler_state}" = 0;
+  __d68 := READ("!{%mem.0}", "!{&temp_queue}");
+  __d69 := __d68 = 0;
+  __d67 := ! "!{fan_status}";
+  __d70 := __d67 & __d69;
+  __d72 := __d70 & __d71;
+  __d94 := __d72 & __d93;
+  __d235 := "!pc[1]" & __d87;
+  __d287 := __d90 & __d235;
+  __d330 := __d92 & __d287;
+  __d157 := next("!pc[0]") & next("!pc[1]");
+  __d110 := ! next("!pc[2]");
+  __d158 := __d110 & __d157;
+  __d112 := ! next("!pc[3]");
+  __d159 := __d112 & __d158;
+  __d333 := __d159 & __d330;
+  __d313 := WRITE("!{%mem.0}", "!{$(in_main#1)<$(in_sensor_task#0)<&temp>>}", "!{$(in_main#1)<$(in_sensor_task#0)<$(in_read_sensor#1)<temp>>>}");
+  __d326 := WRITE(__d313, "!{&temp_queue}", "!{$(in_main#1)<$(in_sensor_task#0)<$(in_read_sensor#1)<temp>>>}");
+  __d327 := next("!{%mem.0}") = __d326;
+  __d75 := "!{$(in_main#1)<$(in_sensor_task#0)<&temp>>}" = next("!{$(in_main#1)<$(in_sensor_task#0)<&temp>>}");
+  __d73 := "!{&temp_queue}" = next("!{&temp_queue}");
+  __d142 := __d73 & __d75;
+  __d77 := "!{$(in_main#1)<$(in_sensor_task#0)<$(in_read_sensor#1)<temp>>>}" = next("!{$(in_main#1)<$(in_sensor_task#0)<$(in_read_sensor#1)<temp>>>}");
+  __d143 := __d77 & __d142;
+  __d79 := "!{%memaddr}" = next("!{%memaddr}");
+  __d144 := __d79 & __d143;
+  __d81 := "!{fan_status}" <-> next("!{fan_status}");
+  __d145 := __d81 & __d144;
+  __d83 := "!{scheduler_state}" = next("!{scheduler_state}");
+  __d146 := __d83 & __d145;
+  __d328 := __d146 & __d327;
+  __d309 := "!{$(in_main#1)<$(in_sensor_task#0)<$(in_read_sensor#1)<temp>>>}" <= 100;
+  __d310 := ! __d309;
+  __d306 := 0 <= "!{$(in_main#1)<$(in_sensor_task#0)<$(in_read_sensor#1)<temp>>>}";
+  __d307 := ! __d306;
+  __d311 := __d307 | __d310;
+  __d312 := ! __d311;
+  __d329 := __d312 & __d328;
+  __d334 := __d329 & __d333;
+  __d151 := ! next("!pc[0]");
+  __d152 := next("!pc[1]") & __d151;
+  __d153 := __d110 & __d152;
+  __d154 := __d112 & __d153;
+  __d331 := __d154 & __d330;
+  __d316 := next("!{$(in_main#1)<$(in_sensor_task#0)<$(in_read_sensor#1)<temp>>>}") = "!{$(in_main#1)<$(in_sensor_task#0)<$(in_read_sensor#1)<h#<temp>>>>}";
+  __d317 := __d142 & __d316;
+  __d318 := __d79 & __d317;
+  __d319 := __d81 & __d318;
+  __d320 := __d83 & __d319;
+  __d85 := "!{%mem.0}" = next("!{%mem.0}");
+  __d321 := __d85 & __d320;
+  __d322 := __d311 & __d321;
+  __d332 := __d322 & __d331;
+  __d335 := __d332 | __d334;
+  __d148 := "!pc[0]" & __d88;
+  __d301 := "!pc[2]" & __d148;
+  __d302 := __d92 & __d301;
+  __d189 := next("!pc[2]") & __d152;
+  __d190 := __d112 & __d189;
+  __d303 := __d190 & __d302;
+  __d147 := __d85 & __d146;
+  __d304 := __d147 & __d303;
+  __d180 := "!pc[0]" & "!pc[1]";
+  __d296 := "!pc[2]" & __d180;
+  __d297 := __d92 & __d296;
+  __d108 := ! next("!pc[1]");
+  __d163 := __d108 & __d151;
+  __d244 := __d110 & __d163;
+  __d245 := next("!pc[3]") & __d244;
+  __d298 := __d245 & __d297;
+  __d299 := __d147 & __d298;
+  __d292 := "!pc[3]" & __d91;
+  __d109 := next("!pc[0]") & __d108;
+  __d111 := __d109 & __d110;
+  __d247 := next("!pc[3]") & __d111;
+  __d293 := __d247 & __d292;
+  __d294 := __d147 & __d293;
+  __d288 := "!pc[3]" & __d287;
+  __d113 := __d111 & __d112;
+  __d289 := __d113 & __d288;
+  __d290 := __d147 & __d289;
+  __d281 := next("!pc[3]") & __d153;
+  __d149 := __d90 & __d148;
+  __d280 := "!pc[3]" & __d149;
+  __d282 := __d280 & __d281;
+  __d270 := next("!{scheduler_state}") = "%{scheduler_state}#2";
+  __d259 := -1 * "%{scheduler_state}#2";
+  __d260 := "!{scheduler_state}" + __d259;
+  __d261 := __d260 = -1;
+  __d253 := "!{scheduler_state}" = 10;
+  __d254 := ! __d253;
+  __d263 := __d254 & __d261;
+  __d258 := "%{scheduler_state}#2" = 0;
+  __d262 := __d253 & __d258;
+  __d264 := __d262 | __d263;
+  __d265 := __d73 & __d264;
+  __d266 := __d75 & __d265;
+  __d267 := __d77 & __d266;
+  __d268 := __d79 & __d267;
+  __d269 := __d81 & __d268;
+  __d271 := __d269 & __d270;
+  __d272 := __d85 & __d271;
+  __d273 := __d73 & __d272;
+  __d274 := __d75 & __d273;
+  __d275 := __d77 & __d274;
+  __d276 := __d79 & __d275;
+  __d277 := __d81 & __d276;
+  __d278 := __d270 & __d277;
+  __d279 := __d85 & __d278;
+  __d284 := __d279 & __d282;
+  __d283 := __d272 & __d282;
+  __d285 := __d283 | __d284;
+  __d236 := "!pc[2]" & __d235;
+  __d237 := __d92 & __d236;
+  __d248 := __d237 & __d247;
+  __d203 := "!{scheduler_state}" = 9;
+  __d200 := "!{scheduler_state}" = 7;
+  __d197 := "!{scheduler_state}" = 4;
+  __d195 := "!{scheduler_state}" = 2;
+  __d198 := __d195 | __d197;
+  __d201 := __d198 | __d200;
+  __d204 := __d201 | __d203;
+  __d216 := ! __d204;
+  __d234 := __d147 & __d216;
+  __d249 := __d234 & __d248;
+  __d238 := next("!pc[2]") & __d157;
+  __d239 := __d112 & __d238;
+  __d240 := __d237 & __d239;
+  __d221 := next("!{fan_status}") <-> "%{fan_status}#2";
+  __d211 := ! "%{fan_status}#2";
+  __d206 := 28 <= __d68;
+  __d208 := ! __d206;
+  __d213 := __d208 & __d211;
+  __d212 := __d206 & "%{fan_status}#2";
+  __d214 := __d212 | __d213;
+  __d217 := __d73 & __d214;
+  __d218 := __d75 & __d217;
+  __d219 := __d77 & __d218;
+  __d220 := __d79 & __d219;
+  __d222 := __d220 & __d221;
+  __d223 := __d83 & __d222;
+  __d224 := __d85 & __d223;
+  __d226 := __d73 & __d224;
+  __d227 := __d75 & __d226;
+  __d228 := __d77 & __d227;
+  __d229 := __d79 & __d228;
+  __d230 := __d221 & __d229;
+  __d231 := __d83 & __d230;
+  __d232 := __d85 & __d231;
+  __d233 := __d204 & __d232;
+  __d242 := __d233 & __d240;
+  __d225 := __d204 & __d224;
+  __d241 := __d225 & __d240;
+  __d243 := __d241 | __d242;
+  __d250 := __d243 | __d249;
+  __d181 := __d90 & __d180;
+  __d182 := __d92 & __d181;
+  __d191 := __d182 & __d190;
+  __d168 := "!{scheduler_state}" = 1;
+  __d169 := ! __d168;
+  __d179 := __d147 & __d169;
+  __d192 := __d179 & __d191;
+  __d183 := next("!pc[2]") & __d109;
+  __d184 := __d112 & __d183;
+  __d185 := __d182 & __d184;
+  __d171 := __d73 & __d147;
+  __d172 := __d75 & __d171;
+  __d173 := __d77 & __d172;
+  __d174 := __d79 & __d173;
+  __d175 := __d81 & __d174;
+  __d176 := __d83 & __d175;
+  __d177 := __d85 & __d176;
+  __d178 := __d168 & __d177;
+  __d187 := __d178 & __d185;
+  __d170 := __d147 & __d168;
+  __d186 := __d170 & __d185;
+  __d188 := __d186 | __d187;
+  __d193 := __d188 | __d192;
+  __d150 := __d92 & __d149;
+  __d160 := __d150 & __d159;
+  __d124 := next("!{$(in_main#1)<$(in_sensor_task#0)<&temp>>}") = "!{%memaddr}";
+  __d125 := __d73 & __d124;
+  __d136 := __d77 & __d125;
+  __d128 := -1 * next("!{%memaddr}");
+  __d129 := "!{%memaddr}" + __d128;
+  __d130 := __d129 = -1;
+  __d137 := __d130 & __d136;
+  __d138 := __d81 & __d137;
+  __d139 := __d83 & __d138;
+  __d140 := __d85 & __d139;
+  __d119 := "!{scheduler_state}" = 6;
+  __d120 := __d71 | __d119;
+  __d123 := ! __d120;
+  __d141 := __d123 & __d140;
+  __d161 := __d141 & __d160;
+  __d155 := __d150 & __d154;
+  __d126 := next("!{$(in_main#1)<$(in_sensor_task#0)<$(in_read_sensor#1)<temp>>>}") = -1;
+  __d127 := __d125 & __d126;
+  __d131 := __d127 & __d130;
+  __d132 := __d81 & __d131;
+  __d133 := __d83 & __d132;
+  __d134 := __d85 & __d133;
+  __d135 := __d120 & __d134;
+  __d156 := __d135 & __d155;
+  __d162 := __d156 | __d161;
+  __d114 := __d93 & __d113;
+  __d96 := WRITE("!{%mem.0}", 1, 0);
+  __d106 := next("!{%mem.0}") = __d96;
+  __d104 := next("!{scheduler_state}") = 0;
+  __d102 := ! next("!{fan_status}");
+  __d100 := next("!{%memaddr}") = 2;
+  __d97 := next("!{&temp_queue}") = 1;
+  __d98 := __d75 & __d97;
+  __d99 := __d77 & __d98;
+  __d101 := __d99 & __d100;
+  __d103 := __d101 & __d102;
+  __d105 := __d103 & __d104;
+  __d107 := __d105 & __d106;
+  __d115 := __d107 & __d114;
+  __d167 := __d115 | __d162;
+  __d194 := __d167 | __d193;
+  __d251 := __d194 | __d250;
+  __d286 := __d251 | __d285;
+  __d291 := __d286 | __d290;
+  __d295 := __d291 | __d294;
+  __d300 := __d295 | __d299;
+  __d305 := __d300 | __d304;
+  __d336 := __d305 | __d335;
+INIT __d94;
+TRANS __d336;
+
+MODULE Globals
+VAR
+  "%memaddr" : integer;
+  "fan_status" : boolean;
+  "scheduler_state" : integer;
+  "%mem.0" : array integer of real;
+  "&temp_queue" : integer;
+
+-- to the global module add:
+VAR schedule_clock: clock;
+
+INIT (schedule_clock = 0)
+
+TRANS case
+  (schedule_clock = f'1/1) : (next(schedule_clock) = 0);
+  TRUE : (next(schedule_clock) = schedule_clock);
+esac
+
+INVAR (TRUE -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'1/1)))
+INVAR (("scheduler_state" = 0) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'1/10)))
+INVAR (("scheduler_state" = 1) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'1/10)))
+INVAR (("scheduler_state" = 2) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'1/10)))
+INVAR (("scheduler_state" = 3) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'3/10)))
+INVAR (("scheduler_state" = 4) -> ((f'1/5 <= schedule_clock) & (schedule_clock <= f'3/10)))
+INVAR (("scheduler_state" = 5) -> ((f'1/5 <= schedule_clock) & (schedule_clock <= f'3/5)))
+INVAR (("scheduler_state" = 6) -> ((f'1/2 <= schedule_clock) & (schedule_clock <= f'3/5)))
+INVAR (("scheduler_state" = 7) -> ((f'3/5 <= schedule_clock) & (schedule_clock <= f'7/10)))
+INVAR (("scheduler_state" = 8) -> ((f'3/5 <= schedule_clock) & (schedule_clock <= f'9/10)))
+INVAR (("scheduler_state" = 9) -> ((f'4/5 <= schedule_clock) & (schedule_clock <= f'9/10)))
+INVAR (("scheduler_state" = 10) -> ((f'4/5 <= schedule_clock) & (schedule_clock <= f'1/1)))
+
+DEFINE
+temp_value := READ("%mem.0", "&temp_queue");
+fan_on := "fan_status";
+fan_off := !"fan_status";
+
+LTLSPEC
+  G(temp_value >= 0)
+
+LTLSPEC
+  G((temp_value > 30) -> F[0,1](fan_on))
+
+MODULE main
+VAR
+  globals : Globals;
+  entry : "`init.and.main"(globals."%memaddr", globals."fan_status", globals."scheduler_state", globals."%mem.0", globals."&temp_queue");

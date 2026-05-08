@@ -1,0 +1,66 @@
+MODULE "`init.and.main"("!{counter}")
+VAR
+  "!pc[0]" : boolean;
+  "!pc[1]" : boolean;
+  "!pc[2]" : boolean;
+IVAR
+  "%{counter}#2" : integer;
+DEFINE
+  __d0 := TRUE;
+  __d30 := ! "!pc[2]";
+  __d28 := ! "!pc[1]";
+  __d27 := ! "!pc[0]";
+  __d29 := __d27 & __d28;
+  __d31 := __d29 & __d30;
+  __d24 := "!{counter}" = 0;
+  __d32 := __d24 & __d31;
+  __d70 := "!pc[1]" & __d27;
+  __d71 := __d30 & __d70;
+  __d36 := ! next("!pc[2]");
+  __d34 := ! next("!pc[1]");
+  __d35 := next("!pc[0]") & __d34;
+  __d37 := __d35 & __d36;
+  __d72 := __d37 & __d71;
+  __d25 := "!{counter}" = next("!{counter}");
+  __d73 := __d25 & __d72;
+  __d59 := ! next("!pc[0]");
+  __d60 := next("!pc[1]") & __d59;
+  __d61 := __d36 & __d60;
+  __d57 := "!pc[0]" & __d28;
+  __d58 := __d30 & __d57;
+  __d62 := __d58 & __d61;
+  __d54 := next("!{counter}") = "%{counter}#2";
+  __d48 := -1 * "%{counter}#2";
+  __d49 := "!{counter}" + __d48;
+  __d50 := __d49 = -1;
+  __d41 := "!{counter}" = 10;
+  __d42 := ! __d41;
+  __d52 := __d42 & __d50;
+  __d47 := "%{counter}#2" = 0;
+  __d51 := __d41 & __d47;
+  __d53 := __d51 | __d52;
+  __d55 := __d53 & __d54;
+  __d56 := __d54 & __d55;
+  __d64 := __d56 & __d62;
+  __d63 := __d55 & __d62;
+  __d65 := __d63 | __d64;
+  __d38 := __d31 & __d37;
+  __d33 := next("!{counter}") = 0;
+  __d39 := __d33 & __d38;
+  __d69 := __d39 | __d65;
+  __d74 := __d69 | __d73;
+INIT __d32;
+TRANS __d74;
+
+MODULE Globals
+VAR
+  "counter" : integer;
+
+LTLSPEC G("counter" >= 0 & "counter" <= 10) -- true
+LTLSPEC G(F("counter" = 0) & F("counter" = 10)) -- true
+LTLSPEC F("counter" < 0 | "counter" > 10) -- false
+
+MODULE main
+VAR
+  globals : Globals;
+  entry : "`init.and.main"(globals."counter");

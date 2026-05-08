@@ -1,0 +1,440 @@
+@TIME_DOMAIN continuous
+
+MODULE "`init.and.main"("!{%memaddr}", "!{elevator_direction_monitor}", "!{elevator_door_monitor}", "!{scheduler_state}", "!{&elevator1}", "!{%mem.r.0.0}", "!{%mem.r.0.1}", "!{%mem.r.0.2}")
+VAR
+  "!pc[0]" : boolean;
+  "!pc[1]" : boolean;
+  "!pc[2]" : boolean;
+  "!pc[3]" : boolean;
+IVAR
+  "!{$(in_main#1)<$(in_get_destination#3)<$aux>>}" : integer;
+  "!{$(in_main#1)<$(in_get_destination#3)<h#<$aux>>>}" : integer;
+  "%{%mem.r.0.1}#2" : array integer of word[1];
+  "%{%mem.r.0.0}#2" : array integer of word[2];
+  "%{%mem.r.0.2}#2" : array integer of integer;
+  "%{$(in_main#1)<$(in_get_destination#3)<$aux>>}#3" : integer;
+  "%{scheduler_state}#2" : integer;
+DEFINE
+  __d0 := TRUE;
+  __d83 := ! "!pc[3]";
+  __d81 := ! "!pc[2]";
+  __d79 := ! "!pc[1]";
+  __d78 := ! "!pc[0]";
+  __d80 := __d78 & __d79;
+  __d82 := __d80 & __d81;
+  __d84 := __d82 & __d83;
+  __d60 := "!{elevator_direction_monitor}" = 0ud2_1;
+  __d57 := ! "!{elevator_door_monitor}";
+  __d56 := "!{scheduler_state}" = 0;
+  __d58 := __d56 & __d57;
+  __d61 := __d58 & __d60;
+  __d85 := __d61 & __d84;
+  __d23 := 0ud2_2 < "!{elevator_direction_monitor}";
+  __d24 := ! __d23;
+  __d86 := __d24 & __d85;
+  __d399 := "!pc[1]" & __d78;
+  __d400 := __d81 & __d399;
+  __d473 := __d83 & __d400;
+  __d196 := next("!pc[0]") & next("!pc[1]");
+  __d112 := ! next("!pc[2]");
+  __d197 := __d112 & __d196;
+  __d114 := ! next("!pc[3]");
+  __d198 := __d114 & __d197;
+  __d474 := __d198 & __d473;
+  __d64 := "!{elevator_direction_monitor}" = next("!{elevator_direction_monitor}");
+  __d62 := "!{%memaddr}" = next("!{%memaddr}");
+  __d178 := __d62 & __d64;
+  __d66 := "!{elevator_door_monitor}" <-> next("!{elevator_door_monitor}");
+  __d179 := __d66 & __d178;
+  __d68 := "!{scheduler_state}" = next("!{scheduler_state}");
+  __d180 := __d68 & __d179;
+  __d70 := "!{&elevator1}" = next("!{&elevator1}");
+  __d181 := __d70 & __d180;
+  __d72 := "!{%mem.r.0.0}" = next("!{%mem.r.0.0}");
+  __d182 := __d72 & __d181;
+  __d74 := "!{%mem.r.0.1}" = next("!{%mem.r.0.1}");
+  __d183 := __d74 & __d182;
+  __d76 := "!{%mem.r.0.2}" = next("!{%mem.r.0.2}");
+  __d184 := __d76 & __d183;
+  __d475 := __d184 & __d474;
+  __d185 := "!pc[0]" & __d79;
+  __d447 := "!pc[2]" & __d185;
+  __d469 := __d83 & __d447;
+  __d277 := next("!pc[2]") & __d196;
+  __d278 := __d114 & __d277;
+  __d470 := __d278 & __d469;
+  __d471 := __d184 & __d470;
+  __d464 := "!pc[2]" & __d399;
+  __d465 := __d83 & __d464;
+  __d110 := ! next("!pc[1]");
+  __d111 := next("!pc[0]") & __d110;
+  __d266 := next("!pc[2]") & __d111;
+  __d267 := __d114 & __d266;
+  __d466 := __d267 & __d465;
+  __d467 := __d184 & __d466;
+  __d460 := "!pc[3]" & __d82;
+  __d188 := ! next("!pc[0]");
+  __d189 := next("!pc[1]") & __d188;
+  __d190 := __d112 & __d189;
+  __d352 := next("!pc[3]") & __d190;
+  __d461 := __d352 & __d460;
+  __d462 := __d184 & __d461;
+  __d186 := __d81 & __d185;
+  __d456 := "!pc[3]" & __d186;
+  __d202 := __d110 & __d188;
+  __d342 := __d112 & __d202;
+  __d343 := next("!pc[3]") & __d342;
+  __d457 := __d343 & __d456;
+  __d458 := __d184 & __d457;
+  __d263 := "!pc[0]" & "!pc[1]";
+  __d264 := __d81 & __d263;
+  __d452 := "!pc[3]" & __d264;
+  __d203 := next("!pc[2]") & __d202;
+  __d407 := next("!pc[3]") & __d203;
+  __d453 := __d407 & __d452;
+  __d454 := __d184 & __d453;
+  __d448 := "!pc[3]" & __d447;
+  __d113 := __d111 & __d112;
+  __d115 := __d113 & __d114;
+  __d449 := __d115 & __d448;
+  __d450 := __d184 & __d449;
+  __d441 := next("!pc[3]") & __d266;
+  __d439 := "!pc[2]" & __d80;
+  __d440 := "!pc[3]" & __d439;
+  __d442 := __d440 & __d441;
+  __d425 := next("!{scheduler_state}") = "%{scheduler_state}#2";
+  __d416 := -1 * "%{scheduler_state}#2";
+  __d417 := "!{scheduler_state}" + __d416;
+  __d418 := __d417 = -1;
+  __d358 := "!{scheduler_state}" = 9;
+  __d379 := ! __d358;
+  __d420 := __d379 & __d418;
+  __d415 := "%{scheduler_state}#2" = 0;
+  __d419 := __d358 & __d415;
+  __d421 := __d419 | __d420;
+  __d422 := __d62 & __d421;
+  __d423 := __d64 & __d422;
+  __d424 := __d66 & __d423;
+  __d426 := __d424 & __d425;
+  __d427 := __d70 & __d426;
+  __d428 := __d72 & __d427;
+  __d429 := __d74 & __d428;
+  __d430 := __d76 & __d429;
+  __d431 := __d62 & __d430;
+  __d432 := __d64 & __d431;
+  __d433 := __d66 & __d432;
+  __d434 := __d425 & __d433;
+  __d435 := __d70 & __d434;
+  __d436 := __d72 & __d435;
+  __d437 := __d74 & __d436;
+  __d438 := __d76 & __d437;
+  __d444 := __d438 & __d442;
+  __d443 := __d430 & __d442;
+  __d445 := __d443 | __d444;
+  __d401 := "!pc[3]" & __d400;
+  __d408 := __d401 & __d407;
+  __d398 := __d184 & __d379;
+  __d409 := __d398 & __d408;
+  __d402 := next("!pc[3]") & __d197;
+  __d403 := __d401 & __d402;
+  __d374 := "!{$(in_main#1)<$(in_get_destination#3)<h#<$aux>>>}" = "%{$(in_main#1)<$(in_get_destination#3)<$aux>>}#3";
+  __d130 := "!{&elevator1}" + 3;
+  __d363 := WRITE("!{%mem.r.0.2}", __d130, "!{$(in_main#1)<$(in_get_destination#3)<h#<$aux>>>}");
+  __d368 := "%{%mem.r.0.2}#2" = __d363;
+  __d360 := "!{$(in_main#1)<$(in_get_destination#3)<h#<$aux>>>}" <= 3;
+  __d359 := 0 <= "!{$(in_main#1)<$(in_get_destination#3)<h#<$aux>>>}";
+  __d361 := __d359 & __d360;
+  __d131 := READ("!{%mem.r.0.2}", __d130);
+  __d128 := "!{&elevator1}" + 2;
+  __d129 := READ("!{%mem.r.0.2}", __d128);
+  __d132 := __d129 = __d131;
+  __d362 := __d132 & __d361;
+  __d370 := __d362 & __d368;
+  __d376 := __d370 & __d374;
+  __d373 := "!{$(in_main#1)<$(in_get_destination#3)<$aux>>}" = "%{$(in_main#1)<$(in_get_destination#3)<$aux>>}#3";
+  __d365 := ! __d132;
+  __d306 := "!{%mem.r.0.2}" = "%{%mem.r.0.2}#2";
+  __d369 := __d306 & __d365;
+  __d375 := __d369 & __d373;
+  __d377 := __d375 | __d376;
+  __d380 := __d62 & __d377;
+  __d381 := __d64 & __d380;
+  __d382 := __d66 & __d381;
+  __d383 := __d68 & __d382;
+  __d384 := __d70 & __d383;
+  __d385 := __d72 & __d384;
+  __d386 := __d74 & __d385;
+  __d325 := next("!{%mem.r.0.2}") = "%{%mem.r.0.2}#2";
+  __d387 := __d325 & __d386;
+  __d389 := __d62 & __d387;
+  __d390 := __d64 & __d389;
+  __d391 := __d66 & __d390;
+  __d392 := __d68 & __d391;
+  __d393 := __d70 & __d392;
+  __d394 := __d72 & __d393;
+  __d395 := __d74 & __d394;
+  __d396 := __d325 & __d395;
+  __d397 := __d358 & __d396;
+  __d405 := __d397 & __d403;
+  __d388 := __d358 & __d387;
+  __d404 := __d388 & __d403;
+  __d406 := __d404 | __d405;
+  __d410 := __d406 | __d409;
+  __d340 := "!pc[2]" & __d263;
+  __d341 := __d83 & __d340;
+  __d353 := __d341 & __d352;
+  __d287 := "!{scheduler_state}" = 8;
+  __d284 := "!{scheduler_state}" = 5;
+  __d283 := "!{scheduler_state}" = 2;
+  __d285 := __d283 | __d284;
+  __d288 := __d285 | __d287;
+  __d313 := ! __d288;
+  __d339 := __d184 & __d313;
+  __d354 := __d339 & __d353;
+  __d346 := next("!pc[3]") & __d113;
+  __d347 := __d341 & __d346;
+  __d297 := __d129 + -1;
+  __d298 := WRITE("!{%mem.r.0.2}", __d128, __d297);
+  __d307 := __d298 = "%{%mem.r.0.2}#2";
+  __d122 := READ("!{%mem.r.0.0}", "!{&elevator1}");
+  __d295 := __d122 = 0ud2_0;
+  __d309 := __d295 & __d307;
+  __d301 := ! __d295;
+  __d308 := __d301 & __d306;
+  __d310 := __d308 | __d309;
+  __d318 := __d62 & __d310;
+  __d319 := __d64 & __d318;
+  __d320 := __d66 & __d319;
+  __d321 := __d68 & __d320;
+  __d322 := __d70 & __d321;
+  __d323 := __d72 & __d322;
+  __d324 := __d74 & __d323;
+  __d326 := __d324 & __d325;
+  __d329 := __d62 & __d326;
+  __d330 := __d64 & __d329;
+  __d331 := __d66 & __d330;
+  __d332 := __d68 & __d331;
+  __d333 := __d70 & __d332;
+  __d334 := __d72 & __d333;
+  __d335 := __d74 & __d334;
+  __d336 := __d325 & __d335;
+  __d289 := __d122 = 0ud2_2;
+  __d294 := ! __d289;
+  __d337 := __d294 & __d336;
+  __d338 := __d288 & __d337;
+  __d350 := __d338 & __d347;
+  __d327 := __d294 & __d326;
+  __d328 := __d288 & __d327;
+  __d348 := __d328 & __d347;
+  __d344 := __d341 & __d343;
+  __d291 := __d129 + 1;
+  __d292 := WRITE("!{%mem.r.0.2}", __d128, __d291);
+  __d314 := next("!{%mem.r.0.2}") = __d292;
+  __d315 := __d183 & __d314;
+  __d316 := __d289 & __d315;
+  __d317 := __d288 & __d316;
+  __d345 := __d317 & __d344;
+  __d349 := __d345 | __d348;
+  __d351 := __d349 | __d350;
+  __d355 := __d351 | __d354;
+  __d265 := __d83 & __d264;
+  __d279 := __d265 & __d278;
+  __d211 := "!{scheduler_state}" = 7;
+  __d208 := "!{scheduler_state}" = 4;
+  __d207 := "!{scheduler_state}" = 1;
+  __d209 := __d207 | __d208;
+  __d212 := __d209 | __d211;
+  __d234 := ! __d212;
+  __d262 := __d184 & __d234;
+  __d280 := __d262 & __d279;
+  __d270 := next("!pc[2]") & __d189;
+  __d271 := __d114 & __d270;
+  __d272 := __d265 & __d271;
+  __d246 := next("!{%mem.r.0.0}") = "%{%mem.r.0.0}#2";
+  __d222 := WRITE("!{%mem.r.0.0}", "!{&elevator1}", 0ud2_1);
+  __d228 := __d222 = "%{%mem.r.0.0}#2";
+  __d217 := __d131 <= __d129;
+  __d230 := __d217 & __d228;
+  __d219 := WRITE("!{%mem.r.0.0}", "!{&elevator1}", 0ud2_2);
+  __d227 := __d219 = "%{%mem.r.0.0}#2";
+  __d218 := ! __d217;
+  __d229 := __d218 & __d227;
+  __d231 := __d229 | __d230;
+  __d241 := __d62 & __d231;
+  __d242 := __d64 & __d241;
+  __d243 := __d66 & __d242;
+  __d244 := __d68 & __d243;
+  __d245 := __d70 & __d244;
+  __d247 := __d245 & __d246;
+  __d248 := __d74 & __d247;
+  __d249 := __d76 & __d248;
+  __d252 := __d62 & __d249;
+  __d253 := __d64 & __d252;
+  __d254 := __d66 & __d253;
+  __d255 := __d68 & __d254;
+  __d256 := __d70 & __d255;
+  __d257 := __d246 & __d256;
+  __d258 := __d74 & __d257;
+  __d259 := __d76 & __d258;
+  __d213 := __d129 <= __d131;
+  __d260 := __d213 & __d259;
+  __d261 := __d212 & __d260;
+  __d275 := __d261 & __d272;
+  __d250 := __d213 & __d249;
+  __d251 := __d212 & __d250;
+  __d273 := __d251 & __d272;
+  __d268 := __d265 & __d267;
+  __d215 := WRITE("!{%mem.r.0.0}", "!{&elevator1}", 0ud2_0);
+  __d235 := next("!{%mem.r.0.0}") = __d215;
+  __d236 := __d181 & __d235;
+  __d237 := __d74 & __d236;
+  __d238 := __d76 & __d237;
+  __d214 := ! __d213;
+  __d239 := __d214 & __d238;
+  __d240 := __d212 & __d239;
+  __d269 := __d240 & __d268;
+  __d274 := __d269 | __d273;
+  __d276 := __d274 | __d275;
+  __d281 := __d276 | __d280;
+  __d187 := __d83 & __d186;
+  __d199 := __d187 & __d198;
+  __d150 := next("!{elevator_direction_monitor}") = __d122;
+  __d170 := __d62 & __d150;
+  __d119 := "!{&elevator1}" + 1;
+  __d120 := READ("!{%mem.r.0.1}", __d119);
+  __d121 := __d120 = 0ud1_1;
+  __d152 := next("!{elevator_door_monitor}") <-> __d121;
+  __d171 := __d152 & __d170;
+  __d172 := __d68 & __d171;
+  __d173 := __d70 & __d172;
+  __d174 := __d72 & __d173;
+  __d175 := __d74 & __d174;
+  __d176 := __d76 & __d175;
+  __d126 := "!{scheduler_state}" = 6;
+  __d123 := "!{scheduler_state}" = 3;
+  __d124 := __d56 | __d123;
+  __d127 := __d124 | __d126;
+  __d148 := ! __d127;
+  __d177 := __d148 & __d176;
+  __d200 := __d177 & __d199;
+  __d191 := __d114 & __d190;
+  __d192 := __d187 & __d191;
+  __d157 := next("!{%mem.r.0.1}") = "%{%mem.r.0.1}#2";
+  __d138 := WRITE("!{%mem.r.0.1}", __d119, 0ud1_0);
+  __d143 := __d138 = "%{%mem.r.0.1}#2";
+  __d133 := __d122 = 0ud2_1;
+  __d134 := __d132 & __d133;
+  __d137 := ! __d134;
+  __d145 := __d137 & __d143;
+  __d135 := WRITE("!{%mem.r.0.1}", __d119, 0ud1_1);
+  __d142 := __d135 = "%{%mem.r.0.1}#2";
+  __d144 := __d134 & __d142;
+  __d146 := __d144 | __d145;
+  __d149 := __d62 & __d146;
+  __d151 := __d149 & __d150;
+  __d153 := __d151 & __d152;
+  __d154 := __d68 & __d153;
+  __d155 := __d70 & __d154;
+  __d156 := __d72 & __d155;
+  __d158 := __d156 & __d157;
+  __d159 := __d76 & __d158;
+  __d161 := __d62 & __d159;
+  __d162 := __d150 & __d161;
+  __d163 := __d152 & __d162;
+  __d164 := __d68 & __d163;
+  __d165 := __d70 & __d164;
+  __d166 := __d72 & __d165;
+  __d167 := __d157 & __d166;
+  __d168 := __d76 & __d167;
+  __d169 := __d127 & __d168;
+  __d194 := __d169 & __d192;
+  __d160 := __d127 & __d159;
+  __d193 := __d160 & __d192;
+  __d195 := __d193 | __d194;
+  __d201 := __d195 | __d200;
+  __d116 := __d84 & __d115;
+  __d93 := WRITE("!{%mem.r.0.2}", 3, 1);
+  __d94 := WRITE(__d93, 4, 1);
+  __d108 := next("!{%mem.r.0.2}") = __d94;
+  __d91 := WRITE("!{%mem.r.0.1}", 2, 0ud1_1);
+  __d106 := next("!{%mem.r.0.1}") = __d91;
+  __d89 := WRITE("!{%mem.r.0.0}", 1, 0ud2_1);
+  __d104 := next("!{%mem.r.0.0}") = __d89;
+  __d102 := next("!{&elevator1}") = 1;
+  __d100 := next("!{scheduler_state}") = 0;
+  __d98 := ! next("!{elevator_door_monitor}");
+  __d96 := next("!{elevator_direction_monitor}") = 0ud2_1;
+  __d95 := next("!{%memaddr}") = 5;
+  __d97 := __d95 & __d96;
+  __d99 := __d97 & __d98;
+  __d101 := __d99 & __d100;
+  __d103 := __d101 & __d102;
+  __d105 := __d103 & __d104;
+  __d107 := __d105 & __d106;
+  __d109 := __d107 & __d108;
+  __d117 := __d109 & __d116;
+  __d206 := __d117 | __d201;
+  __d282 := __d206 | __d281;
+  __d356 := __d282 | __d355;
+  __d411 := __d356 | __d410;
+  __d446 := __d411 | __d445;
+  __d451 := __d446 | __d450;
+  __d455 := __d451 | __d454;
+  __d459 := __d455 | __d458;
+  __d463 := __d459 | __d462;
+  __d468 := __d463 | __d467;
+  __d472 := __d468 | __d471;
+  __d476 := __d472 | __d475;
+  __d477 := __d24 & __d476;
+INIT __d86;
+TRANS __d477;
+
+MODULE Globals
+VAR
+  "%memaddr" : integer;
+  "elevator_direction_monitor" : word[2];
+  "elevator_door_monitor" : boolean;
+  "scheduler_state" : integer;
+  "&elevator1" : integer;
+  "%mem.r.0.0" : array integer of word[2];
+  "%mem.r.0.1" : array integer of word[1];
+  "%mem.r.0.2" : array integer of integer;
+
+annotations:
+VAR schedule_clock: clock;
+
+INIT (schedule_clock = 0)
+
+TRANS case
+  (schedule_clock = f'3/1) : (next(schedule_clock) = 0);
+  TRUE : (next(schedule_clock) = schedule_clock);
+esac
+
+INVAR (TRUE -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'3/1)))
+INVAR (("scheduler_state" = 0) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'1/1)))
+INVAR (("scheduler_state" = 1) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'1/1)))
+INVAR (("scheduler_state" = 2) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'1/1)))
+INVAR (("scheduler_state" = 3) -> ((f'1/1 <= schedule_clock) & (schedule_clock <= f'2/1)))
+INVAR (("scheduler_state" = 4) -> ((f'1/1 <= schedule_clock) & (schedule_clock <= f'2/1)))
+INVAR (("scheduler_state" = 5) -> ((f'1/1 <= schedule_clock) & (schedule_clock <= f'2/1)))
+INVAR (("scheduler_state" = 6) -> ((f'2/1 <= schedule_clock) & (schedule_clock <= f'3/1)))
+INVAR (("scheduler_state" = 7) -> ((f'2/1 <= schedule_clock) & (schedule_clock <= f'3/1)))
+INVAR (("scheduler_state" = 8) -> ((f'2/1 <= schedule_clock) & (schedule_clock <= f'3/1)))
+INVAR (("scheduler_state" = 9) -> ((f'2/1 <= schedule_clock) & (schedule_clock <= f'3/1)))
+
+JUSTICE ("scheduler_state" = 0)
+JUSTICE ("scheduler_state" = 9)
+
+LTLSPEC -- elevator will initially be stationary (quick to prove)
+  F[0,0]("elevator_direction_monitor" = 0ub2_01)
+LTLSPEC -- elevator direction will be still within 3 seconds (refinement error)
+  G(F[0,3]("elevator_direction_monitor" = 0ub2_01))
+LTLSPEC -- fairness sanity check (terminates)
+  G(F("scheduler_state" = 0) & F("scheduler_state" = 9))
+LTLSPEC -- not true that elevator direction will be up (?) within 3 seconds (refinement error)
+  !G(F[0,3]("elevator_direction_monitor" = 0ub2_10))
+
+MODULE main
+VAR
+  globals : Globals;
+  entry : "`init.and.main"(globals."%memaddr", globals."elevator_direction_monitor", globals."elevator_door_monitor", globals."scheduler_state", globals."&elevator1", globals."%mem.r.0.0", globals."%mem.r.0.1", globals."%mem.r.0.2");

@@ -1,0 +1,180 @@
+@TIME_DOMAIN continuous
+
+MODULE "`init.and.main"("!{in_kelvin}", "!{out_celsius}", "!{scheduler_state}")
+VAR
+  "!{$(in_main#0)<main.return>}" : integer;
+  "!pc[0]" : boolean;
+  "!pc[1]" : boolean;
+  "!pc[2]" : boolean;
+IVAR
+  "!{$(in_main#0)<h#<in_kelvin>>}" : integer;
+  "!{$(in_main#0)<$(in_task1#0)<$temp.1>>}" : integer;
+  "!{$(in_main#0)<$(in_task1#0)<$tmp>>}" : integer;
+  "%{$(in_main#0)<main.return>}#1" : integer;
+  "%{$(in_main#0)<$(in_task1#0)<$temp.1>>}#3" : integer;
+  "%{$(in_main#0)<$(in_task1#0)<$tmp>>}#3" : integer;
+  "%{out_celsius}#2" : integer;
+  "%{scheduler_state}#2" : integer;
+DEFINE
+  __d0 := TRUE;
+  __d47 := ! "!pc[2]";
+  __d45 := ! "!pc[1]";
+  __d44 := ! "!pc[0]";
+  __d46 := __d44 & __d45;
+  __d48 := __d46 & __d47;
+  __d35 := "!{scheduler_state}" = 0;
+  __d49 := __d35 & __d48;
+  __d156 := "!pc[2]" & __d46;
+  __d60 := ! next("!pc[2]");
+  __d58 := ! next("!pc[1]");
+  __d59 := next("!pc[0]") & __d58;
+  __d61 := __d59 & __d60;
+  __d157 := __d61 & __d156;
+  __d38 := "!{$(in_main#0)<main.return>}" = next("!{$(in_main#0)<main.return>}");
+  __d36 := "!{in_kelvin}" = next("!{in_kelvin}");
+  __d110 := __d36 & __d38;
+  __d40 := "!{out_celsius}" = next("!{out_celsius}");
+  __d111 := __d40 & __d110;
+  __d42 := "!{scheduler_state}" = next("!{scheduler_state}");
+  __d112 := __d42 & __d111;
+  __d158 := __d112 & __d157;
+  __d115 := ! next("!pc[0]");
+  __d149 := __d58 & __d115;
+  __d150 := next("!pc[2]") & __d149;
+  __d147 := "!pc[1]" & __d44;
+  __d148 := __d47 & __d147;
+  __d151 := __d148 & __d150;
+  __d141 := next("!{scheduler_state}") = "%{scheduler_state}#2";
+  __d132 := -1 * "%{scheduler_state}#2";
+  __d133 := "!{scheduler_state}" + __d132;
+  __d134 := __d133 = -1;
+  __d126 := "!{scheduler_state}" = 1;
+  __d127 := ! __d126;
+  __d136 := __d127 & __d134;
+  __d131 := "%{scheduler_state}#2" = 0;
+  __d135 := __d126 & __d131;
+  __d137 := __d135 | __d136;
+  __d138 := __d36 & __d137;
+  __d139 := __d38 & __d138;
+  __d140 := __d40 & __d139;
+  __d142 := __d140 & __d141;
+  __d143 := __d36 & __d142;
+  __d144 := __d38 & __d143;
+  __d145 := __d40 & __d144;
+  __d146 := __d141 & __d145;
+  __d153 := __d146 & __d151;
+  __d152 := __d142 & __d151;
+  __d154 := __d152 | __d153;
+  __d116 := next("!pc[1]") & __d115;
+  __d117 := __d60 & __d116;
+  __d113 := "!pc[0]" & __d45;
+  __d114 := __d47 & __d113;
+  __d118 := __d114 & __d117;
+  __d103 := next("!{out_celsius}") = "%{out_celsius}#2";
+  __d100 := next("!{in_kelvin}") = "!{$(in_main#0)<h#<in_kelvin>>}";
+  __d94 := -1 * "%{out_celsius}#2";
+  __d95 := "!{$(in_main#0)<h#<in_kelvin>>}" + __d94;
+  __d96 := __d95 = 273;
+  __d84 := -1 * "%{$(in_main#0)<$(in_task1#0)<$tmp>>}#3";
+  __d85 := "!{$(in_main#0)<h#<in_kelvin>>}" + __d84;
+  __d86 := __d85 = 273;
+  __d74 := -1 * "%{$(in_main#0)<$(in_task1#0)<$temp.1>>}#3";
+  __d75 := "!{$(in_main#0)<h#<in_kelvin>>}" + __d74;
+  __d76 := __d75 = 273;
+  __d78 := __d35 & __d76;
+  __d88 := __d78 & __d86;
+  __d98 := __d88 & __d96;
+  __d93 := "!{out_celsius}" = "%{out_celsius}#2";
+  __d83 := "!{$(in_main#0)<$(in_task1#0)<$tmp>>}" = "%{$(in_main#0)<$(in_task1#0)<$tmp>>}#3";
+  __d73 := "!{$(in_main#0)<$(in_task1#0)<$temp.1>>}" = "%{$(in_main#0)<$(in_task1#0)<$temp.1>>}#3";
+  __d68 := ! __d35;
+  __d77 := __d68 & __d73;
+  __d87 := __d77 & __d83;
+  __d97 := __d87 & __d93;
+  __d99 := __d97 | __d98;
+  __d101 := __d99 & __d100;
+  __d102 := __d38 & __d101;
+  __d104 := __d102 & __d103;
+  __d105 := __d42 & __d104;
+  __d106 := __d100 & __d105;
+  __d107 := __d38 & __d106;
+  __d108 := __d103 & __d107;
+  __d109 := __d42 & __d108;
+  __d120 := __d109 & __d118;
+  __d119 := __d105 & __d118;
+  __d121 := __d119 | __d120;
+  __d62 := __d48 & __d61;
+  __d56 := next("!{scheduler_state}") = 0;
+  __d54 := next("!{out_celsius}") = 0;
+  __d52 := next("!{$(in_main#0)<main.return>}") = "%{$(in_main#0)<main.return>}#1";
+  __d51 := next("!{in_kelvin}") = 0;
+  __d53 := __d51 & __d52;
+  __d55 := __d53 & __d54;
+  __d57 := __d55 & __d56;
+  __d63 := __d57 & __d62;
+  __d125 := __d63 | __d121;
+  __d155 := __d125 | __d154;
+  __d159 := __d155 | __d158;
+INIT __d49;
+TRANS __d159;
+
+MODULE Globals
+VAR
+  "in_kelvin" : integer;
+  "out_celsius" : integer;
+  "scheduler_state" : integer;
+
+-- Generated Scheduler timing annotation:
+VAR schedule_clock: clock;
+INIT (schedule_clock = 0)
+TRANS case
+  (schedule_clock = f'1/1) : (next(schedule_clock) = 0);
+  TRUE : (next(schedule_clock) = schedule_clock);
+esac
+INVAR (TRUE -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'1/1)))
+INVAR (("scheduler_state" = 0) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'0/1)))
+INVAR (("scheduler_state" = 1) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'1/1)))
+JUSTICE ("scheduler_state" = 0)
+JUSTICE ("scheduler_state" = 1)
+-- Manually added annotation
+URGENT "scheduler_state" = 0
+
+-- #################### FALSE PROPERTIES ####################
+
+-- by disproving these properties, we know that the implications below does not hold vacuously
+-- the counterexamples demonstrate that there are runs where the temperature is eventually
+-- always positive/negative
+-- I have not found a provable analogue to this in LTL
+LTLSPEC G(!G("in_kelvin" > 273))
+LTLSPEC G(!G("in_kelvin" < 273))
+
+-- #################### TRUE PROPERTIES ####################
+
+-- unbounded properties
+LTLSPEC
+  G(G("in_kelvin" > 273) -> F(G("out_celsius" > 0)))
+LTLSPEC
+  G(G("in_kelvin" < 273) -> F(G("out_celsius" < 0)))
+
+--terminating bounded
+LTLSPEC
+  G(G[0,1]("in_kelvin" > 273) -> F("out_celsius" > 0))
+LTLSPEC
+  G(G[0,1]("in_kelvin" < 273) -> F("out_celsius" < 0))
+
+LTLSPEC
+  G(G("in_kelvin" > 273) -> F[0,1](G("out_celsius" > 0)))
+LTLSPEC
+  G(G("in_kelvin" < 273) -> F[0,1](G("out_celsius" < 0)))
+
+-- potentially non terminating
+LTLSPEC
+  G(G[0,10]("in_kelvin" > 273) -> F[0,1](G[0,9]("out_celsius" > 0)))
+LTLSPEC
+  G("in_kelvin" < 273 -> F("out_celsius" < 0))
+
+
+MODULE main
+VAR
+  globals : Globals;
+  entry : "`init.and.main"(globals."in_kelvin", globals."out_celsius", globals."scheduler_state");

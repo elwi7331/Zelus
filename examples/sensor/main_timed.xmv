@@ -1,0 +1,175 @@
+@TIME_DOMAIN continuous
+
+MODULE "`init.and.main"("!{scheduler_state}", "!{sensor_error}", "!{sensor_faulty}")
+VAR
+  "!{$(in_main#0)<$(in_task_1#0)<$(in_read_sensor#0)<read_sensor.return>>>}" : integer;
+  "!pc[0]" : boolean;
+  "!pc[1]" : boolean;
+  "!pc[2]" : boolean;
+IVAR
+  "!{$(in_main#0)<$(in_task_1#0)<h#<sensor_faulty>>>}" : boolean;
+  "!{$(in_main#0)<$(in_task_1#0)<$(in_read_sensor#0)<h#<value>>>>}" : integer;
+  "%{$(in_main#0)<$(in_task_1#0)<$(in_read_sensor#0)<read_sensor.return>>>}#3" : integer;
+  "%{scheduler_state}#2" : integer;
+  "%{sensor_error}#2" : boolean;
+DEFINE
+  __d0 := TRUE;
+  __d52 := ! "!pc[2]";
+  __d50 := ! "!pc[1]";
+  __d49 := ! "!pc[0]";
+  __d51 := __d49 & __d50;
+  __d53 := __d51 & __d52;
+  __d39 := ! "!{sensor_error}";
+  __d37 := ! "!{sensor_faulty}";
+  __d36 := "!{scheduler_state}" = 0;
+  __d38 := __d36 & __d37;
+  __d40 := __d38 & __d39;
+  __d54 := __d40 & __d53;
+  __d164 := "!pc[1]" & __d49;
+  __d172 := "!pc[2]" & __d164;
+  __d106 := next("!pc[0]") & next("!pc[1]");
+  __d63 := ! next("!pc[2]");
+  __d107 := __d63 & __d106;
+  __d173 := __d107 & __d172;
+  __d43 := "!{scheduler_state}" = next("!{scheduler_state}");
+  __d41 := "!{$(in_main#0)<$(in_task_1#0)<$(in_read_sensor#0)<read_sensor.return>>>}" = next("!{$(in_main#0)<$(in_task_1#0)<$(in_read_sensor#0)<read_sensor.return>>>}");
+  __d93 := __d41 & __d43;
+  __d45 := "!{sensor_error}" <-> next("!{sensor_error}");
+  __d94 := __d45 & __d93;
+  __d47 := "!{sensor_faulty}" <-> next("!{sensor_faulty}");
+  __d95 := __d47 & __d94;
+  __d174 := __d95 & __d173;
+  __d99 := ! next("!pc[0]");
+  __d100 := next("!pc[1]") & __d99;
+  __d166 := next("!pc[2]") & __d100;
+  __d165 := __d52 & __d164;
+  __d167 := __d165 & __d166;
+  __d157 := next("!{sensor_error}") <-> "%{sensor_error}#2";
+  __d151 := "!{sensor_error}" <-> "%{sensor_error}#2";
+  __d148 := 0 <= "!{$(in_main#0)<$(in_task_1#0)<$(in_read_sensor#0)<read_sensor.return>>>}";
+  __d153 := __d148 & __d151;
+  __d149 := ! __d148;
+  __d152 := __d149 & "%{sensor_error}#2";
+  __d154 := __d152 | __d153;
+  __d155 := __d41 & __d154;
+  __d156 := __d43 & __d155;
+  __d158 := __d156 & __d157;
+  __d159 := __d47 & __d158;
+  __d160 := __d41 & __d159;
+  __d161 := __d43 & __d160;
+  __d162 := __d157 & __d161;
+  __d163 := __d47 & __d162;
+  __d169 := __d163 & __d167;
+  __d168 := __d159 & __d167;
+  __d170 := __d168 | __d169;
+  __d97 := "!pc[0]" & __d50;
+  __d144 := "!pc[2]" & __d97;
+  __d61 := ! next("!pc[1]");
+  __d62 := next("!pc[0]") & __d61;
+  __d64 := __d62 & __d63;
+  __d145 := __d64 & __d144;
+  __d146 := __d95 & __d145;
+  __d138 := next("!pc[2]") & __d62;
+  __d136 := "!pc[0]" & "!pc[1]";
+  __d137 := __d52 & __d136;
+  __d139 := __d137 & __d138;
+  __d128 := next("!{scheduler_state}") = "%{scheduler_state}#2";
+  __d121 := -1 * "%{scheduler_state}#2";
+  __d122 := "!{scheduler_state}" + __d121;
+  __d123 := __d122 = -1;
+  __d115 := "!{scheduler_state}" = 1;
+  __d116 := ! __d115;
+  __d125 := __d116 & __d123;
+  __d120 := "%{scheduler_state}#2" = 0;
+  __d124 := __d115 & __d120;
+  __d126 := __d124 | __d125;
+  __d127 := __d41 & __d126;
+  __d129 := __d127 & __d128;
+  __d130 := __d45 & __d129;
+  __d131 := __d47 & __d130;
+  __d132 := __d41 & __d131;
+  __d133 := __d128 & __d132;
+  __d134 := __d45 & __d133;
+  __d135 := __d47 & __d134;
+  __d141 := __d135 & __d139;
+  __d140 := __d131 & __d139;
+  __d142 := __d140 | __d141;
+  __d98 := __d52 & __d97;
+  __d108 := __d98 & __d107;
+  __d80 := ! __d36;
+  __d96 := __d80 & __d95;
+  __d109 := __d96 & __d108;
+  __d101 := __d63 & __d100;
+  __d102 := __d98 & __d101;
+  __d85 := next("!{sensor_faulty}") <-> "!{$(in_main#0)<$(in_task_1#0)<h#<sensor_faulty>>>}";
+  __d81 := next("!{$(in_main#0)<$(in_task_1#0)<$(in_read_sensor#0)<read_sensor.return>>>}") = "%{$(in_main#0)<$(in_task_1#0)<$(in_read_sensor#0)<read_sensor.return>>>}#3";
+  __d75 := "!{$(in_main#0)<$(in_task_1#0)<$(in_read_sensor#0)<h#<value>>>>}" = "%{$(in_main#0)<$(in_task_1#0)<$(in_read_sensor#0)<read_sensor.return>>>}#3";
+  __d70 := ! "!{$(in_main#0)<$(in_task_1#0)<h#<sensor_faulty>>>}";
+  __d77 := __d70 & __d75;
+  __d74 := "%{$(in_main#0)<$(in_task_1#0)<$(in_read_sensor#0)<read_sensor.return>>>}#3" = -1;
+  __d76 := "!{$(in_main#0)<$(in_task_1#0)<h#<sensor_faulty>>>}" & __d74;
+  __d78 := __d76 | __d77;
+  __d82 := __d78 & __d81;
+  __d83 := __d43 & __d82;
+  __d84 := __d45 & __d83;
+  __d86 := __d84 & __d85;
+  __d88 := __d81 & __d86;
+  __d89 := __d43 & __d88;
+  __d90 := __d45 & __d89;
+  __d91 := __d85 & __d90;
+  __d92 := __d36 & __d91;
+  __d104 := __d92 & __d102;
+  __d87 := __d36 & __d86;
+  __d103 := __d87 & __d102;
+  __d105 := __d103 | __d104;
+  __d110 := __d105 | __d109;
+  __d65 := __d53 & __d64;
+  __d59 := ! next("!{sensor_faulty}");
+  __d57 := ! next("!{sensor_error}");
+  __d55 := next("!{scheduler_state}") = 0;
+  __d56 := __d41 & __d55;
+  __d58 := __d56 & __d57;
+  __d60 := __d58 & __d59;
+  __d66 := __d60 & __d65;
+  __d114 := __d66 | __d110;
+  __d143 := __d114 | __d142;
+  __d147 := __d143 | __d146;
+  __d171 := __d147 | __d170;
+  __d175 := __d171 | __d174;
+INIT __d54;
+TRANS __d175;
+
+MODULE Globals
+VAR
+  "scheduler_state" : integer;
+  "sensor_error" : boolean;
+  "sensor_faulty" : boolean;
+
+VAR schedule_clock: clock;
+
+INIT (schedule_clock = 0)
+
+TRANS case
+  (schedule_clock = f'1/1) : (next(schedule_clock) = 0);
+  TRUE : (next(schedule_clock) = schedule_clock);
+esac
+
+INVAR (TRUE -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'1/1)))
+INVAR (("scheduler_state" = 0) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'0/1)))
+INVAR (("scheduler_state" = 1) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'1/1)))
+
+JUSTICE ("scheduler_state" = 0)
+JUSTICE ("scheduler_state" = 1)
+
+LTLSPEC -- error follows malfunction
+  G("sensor_faulty" -> F[0,1](G("sensor_error")))
+LTLSPEC -- error is permanent
+  G("sensor_error" -> G("sensor_error"))
+LTLSPEC -- malfunction free runs are also error free
+  -- this can fail as global variable is not updated...
+  G(!"sensor_faulty") -> G(!"sensor_error")
+
+MODULE main
+VAR
+  globals : Globals;
+  entry : "`init.and.main"(globals."scheduler_state", globals."sensor_error", globals."sensor_faulty");

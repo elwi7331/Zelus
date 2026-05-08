@@ -1,0 +1,230 @@
+@TIME_DOMAIN continuous
+
+MODULE "`init.and.main"("!{heater_on}", "!{in_kelvin}", "!{out_celsius}", "!{scheduler_state}")
+VAR
+  "!{$(in_main#0)<main.return>}" : integer;
+  "!pc[0]" : boolean;
+  "!pc[1]" : boolean;
+  "!pc[2]" : boolean;
+IVAR
+  "!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}" : integer;
+  "!{$(in_main#0)<$(in_conversion_task#1)<$temp.1>>}" : integer;
+  "!{$(in_main#0)<$(in_conversion_task#1)<$tmp>>}" : integer;
+  "%{$(in_main#0)<main.return>}#1" : integer;
+  "%{$(in_main#0)<$(in_conversion_task#1)<$temp.1>>}#3" : integer;
+  "%{$(in_main#0)<$(in_conversion_task#1)<$tmp>>}#3" : integer;
+  "%{out_celsius}#2" : integer;
+  "%{heater_on}#2" : boolean;
+  "%{scheduler_state}#2" : integer;
+DEFINE
+  __d0 := TRUE;
+  __d60 := ! "!pc[2]";
+  __d58 := ! "!pc[1]";
+  __d57 := ! "!pc[0]";
+  __d59 := __d57 & __d58;
+  __d61 := __d59 & __d60;
+  __d45 := ! "!{heater_on}";
+  __d42 := 374 <= "!{in_kelvin}";
+  __d43 := ! __d42;
+  __d38 := "!{in_kelvin}" <= 0;
+  __d39 := ! __d38;
+  __d37 := "!{scheduler_state}" = 0;
+  __d40 := __d37 & __d39;
+  __d44 := __d40 & __d43;
+  __d46 := __d44 & __d45;
+  __d62 := __d46 & __d61;
+  __d231 := "!pc[2]" & __d59;
+  __d73 := ! next("!pc[1]");
+  __d74 := next("!pc[0]") & __d73;
+  __d191 := next("!pc[2]") & __d74;
+  __d232 := __d191 & __d231;
+  __d49 := "!{heater_on}" <-> next("!{heater_on}");
+  __d47 := "!{$(in_main#0)<main.return>}" = next("!{$(in_main#0)<main.return>}");
+  __d139 := __d47 & __d49;
+  __d51 := "!{in_kelvin}" = next("!{in_kelvin}");
+  __d140 := __d51 & __d139;
+  __d53 := "!{out_celsius}" = next("!{out_celsius}");
+  __d141 := __d53 & __d140;
+  __d55 := "!{scheduler_state}" = next("!{scheduler_state}");
+  __d142 := __d55 & __d141;
+  __d233 := __d142 & __d232;
+  __d183 := "!pc[1]" & __d57;
+  __d227 := "!pc[2]" & __d183;
+  __d75 := ! next("!pc[2]");
+  __d76 := __d74 & __d75;
+  __d228 := __d76 & __d227;
+  __d229 := __d142 & __d228;
+  __d145 := ! next("!pc[0]");
+  __d146 := next("!pc[1]") & __d145;
+  __d221 := next("!pc[2]") & __d146;
+  __d143 := "!pc[0]" & __d58;
+  __d220 := "!pc[2]" & __d143;
+  __d222 := __d220 & __d221;
+  __d213 := next("!{scheduler_state}") = "%{scheduler_state}#2";
+  __d203 := -1 * "%{scheduler_state}#2";
+  __d204 := "!{scheduler_state}" + __d203;
+  __d205 := __d204 = -1;
+  __d197 := "!{scheduler_state}" = 5;
+  __d198 := ! __d197;
+  __d207 := __d198 & __d205;
+  __d202 := "%{scheduler_state}#2" = 0;
+  __d206 := __d197 & __d202;
+  __d208 := __d206 | __d207;
+  __d209 := __d47 & __d208;
+  __d210 := __d49 & __d209;
+  __d211 := __d51 & __d210;
+  __d212 := __d53 & __d211;
+  __d214 := __d212 & __d213;
+  __d215 := __d47 & __d214;
+  __d216 := __d49 & __d215;
+  __d217 := __d51 & __d216;
+  __d218 := __d53 & __d217;
+  __d219 := __d213 & __d218;
+  __d224 := __d219 & __d222;
+  __d223 := __d214 & __d222;
+  __d225 := __d223 | __d224;
+  __d184 := __d60 & __d183;
+  __d192 := __d184 & __d191;
+  __d157 := "!{scheduler_state}" = 2;
+  __d168 := ! __d157;
+  __d182 := __d142 & __d168;
+  __d193 := __d182 & __d192;
+  __d185 := __d73 & __d145;
+  __d186 := next("!pc[2]") & __d185;
+  __d187 := __d184 & __d186;
+  __d170 := next("!{heater_on}") <-> "%{heater_on}#2";
+  __d163 := ! "%{heater_on}#2";
+  __d158 := 0 <= "!{out_celsius}";
+  __d165 := __d158 & __d163;
+  __d159 := ! __d158;
+  __d164 := __d159 & "%{heater_on}#2";
+  __d166 := __d164 | __d165;
+  __d169 := __d47 & __d166;
+  __d171 := __d169 & __d170;
+  __d172 := __d51 & __d171;
+  __d173 := __d53 & __d172;
+  __d174 := __d55 & __d173;
+  __d176 := __d47 & __d174;
+  __d177 := __d170 & __d176;
+  __d178 := __d51 & __d177;
+  __d179 := __d53 & __d178;
+  __d180 := __d55 & __d179;
+  __d181 := __d157 & __d180;
+  __d189 := __d181 & __d187;
+  __d175 := __d157 & __d174;
+  __d188 := __d175 & __d187;
+  __d190 := __d188 | __d189;
+  __d194 := __d190 | __d193;
+  __d147 := __d75 & __d146;
+  __d144 := __d60 & __d143;
+  __d148 := __d144 & __d147;
+  __d129 := next("!{out_celsius}") = "%{out_celsius}#2";
+  __d127 := next("!{in_kelvin}") = "!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}";
+  __d118 := -1 * "%{out_celsius}#2";
+  __d119 := "!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}" + __d118;
+  __d120 := __d119 = 273;
+  __d108 := -1 * "%{$(in_main#0)<$(in_conversion_task#1)<$tmp>>}#3";
+  __d109 := "!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}" + __d108;
+  __d110 := __d109 = 273;
+  __d98 := -1 * "%{$(in_main#0)<$(in_conversion_task#1)<$temp.1>>}#3";
+  __d99 := "!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}" + __d98;
+  __d100 := __d99 = 273;
+  __d84 := "!{scheduler_state}" = 4;
+  __d85 := __d37 | __d84;
+  __d102 := __d85 & __d100;
+  __d112 := __d102 & __d110;
+  __d122 := __d112 & __d120;
+  __d117 := "!{out_celsius}" = "%{out_celsius}#2";
+  __d107 := "!{$(in_main#0)<$(in_conversion_task#1)<$tmp>>}" = "%{$(in_main#0)<$(in_conversion_task#1)<$tmp>>}#3";
+  __d97 := "!{$(in_main#0)<$(in_conversion_task#1)<$temp.1>>}" = "%{$(in_main#0)<$(in_conversion_task#1)<$temp.1>>}#3";
+  __d91 := ! __d85;
+  __d101 := __d91 & __d97;
+  __d111 := __d101 & __d107;
+  __d121 := __d111 & __d117;
+  __d123 := __d121 | __d122;
+  __d125 := __d47 & __d123;
+  __d126 := __d49 & __d125;
+  __d128 := __d126 & __d127;
+  __d130 := __d128 & __d129;
+  __d131 := __d55 & __d130;
+  __d133 := __d47 & __d131;
+  __d134 := __d49 & __d133;
+  __d135 := __d127 & __d134;
+  __d136 := __d129 & __d135;
+  __d137 := __d55 & __d136;
+  __d80 := 374 <= "!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}";
+  __d81 := ! __d80;
+  __d79 := 0 <= "!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}";
+  __d82 := __d79 & __d81;
+  __d138 := __d82 & __d137;
+  __d150 := __d138 & __d148;
+  __d132 := __d82 & __d131;
+  __d149 := __d132 & __d148;
+  __d151 := __d149 | __d150;
+  __d77 := __d61 & __d76;
+  __d71 := next("!{scheduler_state}") = 0;
+  __d69 := next("!{out_celsius}") = 0;
+  __d67 := next("!{in_kelvin}") = 0;
+  __d65 := ! next("!{heater_on}");
+  __d64 := next("!{$(in_main#0)<main.return>}") = "%{$(in_main#0)<main.return>}#1";
+  __d66 := __d64 & __d65;
+  __d68 := __d66 & __d67;
+  __d70 := __d68 & __d69;
+  __d72 := __d70 & __d71;
+  __d78 := __d72 & __d77;
+  __d155 := __d78 | __d151;
+  __d195 := __d155 | __d194;
+  __d226 := __d195 | __d225;
+  __d230 := __d226 | __d229;
+  __d234 := __d230 | __d233;
+INIT __d62;
+TRANS __d234;
+
+MODULE Globals
+VAR
+  "heater_on" : boolean;
+  "in_kelvin" : integer;
+  "out_celsius" : integer;
+  "scheduler_state" : integer;
+
+-- Generated Scheduler timing annotation:
+VAR schedule_clock: clock;
+INIT (schedule_clock = 0)
+TRANS case
+  (schedule_clock = f'2/1) : (next(schedule_clock) = 0);
+  TRUE : (next(schedule_clock) = schedule_clock);
+esac
+INVAR (TRUE -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'2/1)))
+INVAR (("scheduler_state" = 0) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'0/1)))
+INVAR (("scheduler_state" = 1) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'1/2)))
+INVAR (("scheduler_state" = 2) -> ((f'1/2 <= schedule_clock) & (schedule_clock <= f'1/2)))
+INVAR (("scheduler_state" = 3) -> ((f'1/2 <= schedule_clock) & (schedule_clock <= f'1/1)))
+INVAR (("scheduler_state" = 4) -> ((f'1/1 <= schedule_clock) & (schedule_clock <= f'1/1)))
+INVAR (("scheduler_state" = 5) -> ((f'1/1 <= schedule_clock) & (schedule_clock <= f'2/1)))
+URGENT ("scheduler_state" = 0)
+URGENT ("scheduler_state" = 2)
+URGENT ("scheduler_state" = 4)
+JUSTICE ("scheduler_state" = 0)
+JUSTICE ("scheduler_state" = 5)
+
+-- #################### FALSE PROPERTIES ####################
+-- unbounded
+
+LTLSPEC -- disproving this shows that implications below are not vacuous
+  !F(G[0,1]("out_celsius" < 0))
+
+-- bounded
+LTLSPEC -- too tight
+  G(G[0,1]("out_celsius") < 0 -> F[0,1]("heater_on"))
+
+
+-- #################### TRUE PROPERTIES ####################
+-- bounded
+LTLSPEC
+  G(G[0,1]("out_celsius") < 0 -> F[0,2]("heater_on"))
+
+
+MODULE main
+VAR
+  globals : Globals;
+  entry : "`init.and.main"(globals."heater_on", globals."in_kelvin", globals."out_celsius", globals."scheduler_state");

@@ -1,0 +1,41 @@
+use crate::schedule::{EndPoint, Interval, Schedule, Job, Task};
+use fraction::Fraction;
+use std::collections::{HashSet};
+use std::str::FromStr;
+
+grammar;
+
+Integer: u32 = {
+    <s:r"[1-9][0-9]*"> => u32::from_str(s).expect("Could not parse integer from str"),
+    "0" => 0
+}
+
+Real: Fraction = {
+    "f'" <num:Integer> "/" <den:Integer> => Fraction::new(num, den),
+    <s:r"(0|[1-9][0-9])*\.[0-9]+"> => Fraction::from_str(s).expect("Could not parse real from str"),
+    <i:Integer> => Fraction::new(i, 1u32),
+}
+
+Interval: Interval = {
+    "[" <l:Real> "," <r:Real> "]" => Interval(EndPoint::Closed(l), EndPoint::Closed(r)),
+    "[" <l:Real> "," <r:Real> ")" => Interval(EndPoint::Closed(l), EndPoint::Open(r)),
+    "(" <l:Real> "," <r:Real> "]" => Interval(EndPoint::Open(l), EndPoint::Closed(r)),
+    "(" <l:Real> "," <r:Real> ")" => Interval(EndPoint::Open(l), EndPoint::Open(r)),
+}
+
+TaskIdentifier: &'input str = <s:r"[_a-zA-Z][_a-zA-Z0-9]*"> => s;
+
+Job: (&'input str, Interval) = <id:TaskIdentifier> ":" <i:Interval> => (id, i);
+
+JobList: Vec<(&'input str, Interval)> = <v:(<Job> ";")*> => v;
+
+SchedulePrefix: () = {
+    "CHRONOS_SCHEDULE" => (),
+    "SCHEDULE" => (),
+}
+
+pub Schedule: Schedule<'input> = SchedulePrefix "hyperperiod" ":" <hyper_period:Real> ";" <job_list:JobList> => {
+    let tasks: HashSet<Task> = job_list.iter().map(|(s, _)| Task(s)).collect();
+    let job_list: Vec<Job> = job_list.into_iter().map(|(s, i)| Job(Some(Task(s)), i)).collect();
+    Schedule::new(tasks, job_list, hyper_period)
+};

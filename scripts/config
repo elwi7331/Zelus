@@ -1,0 +1,10 @@
+# fill out:
+c2kratos="path/to/c2kratos.py"
+kratos="path/to/kratos-binary"
+nuxmv="path/to/nuxmv-binary"
+python="path/to/python/with/dependencies"
+
+# should not require changing
+config_dir=${0:h}
+timed_cmd="$config_dir/timed.cmd"
+infinite_cmd="$config_dir/infinite.cmd"
