@@ -99,6 +99,19 @@ impl Init {
             Box::new(XmvExp::Int(0)),
         ))
     }
+
+    fn zero_scheduler(integer_type: IntegerType) -> Self {
+        let zero = match integer_type {
+            IntegerType::XmvInt => XmvExp::Int(0),
+            IntegerType::BitVec => XmvExp::BitInt(0),
+        };
+
+        Self(XmvExp::BinOp(
+            XmvBinOp::Eq,
+            Box::new(XmvExp::ScheduleState),
+            Box::new(zero),
+        ))
+    }
 }
 
 pub struct Justice(XmvExp);
@@ -298,7 +311,7 @@ pub struct TimingConstraints {
     invar: Vec<Invar>,
     urgent: Vec<Urgent>,
     trans: Trans,
-    init: Init,
+    init: Vec<Init>,
     justice: Vec<Justice>,
 }
 
@@ -324,7 +337,12 @@ impl TimingConstraints {
 
         // clock discrete behavior
         let trans = Trans::from_hyperperiod(hyperperiod);
-        let init = Init::zero_clock();
+
+        // clock and scheduler initial value
+        // we constrain scheduler also, to minimize init-behavior
+        // note that Kratos initializes variables as a "step"
+        let init = vec![Init::zero_clock(), Init::zero_scheduler(integer_type)];
+
         // scheduler fairness (perhaps redundant)
         let justice = Justice::from_schedule(schedule, integer_type);
 
@@ -351,7 +369,7 @@ impl Xmv for TimingConstraints {
     fn as_xmv(&self) -> String {
         format!(
             "-- At the top of the xmv file add:\n@TIME_DOMAIN continuous\n-- to the global module add:\nVAR schedule_clock: clock;\n{}\n{}\n{}\n{}\n{}",
-            self.init.as_xmv(),
+            self.init.as_slice().as_xmv(),
             self.trans.as_xmv(),
             self.invar.as_slice().as_xmv(),
             self.urgent.as_slice().as_xmv(),
