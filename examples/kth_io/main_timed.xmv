@@ -2,15 +2,16 @@
 
 MODULE "`init.and.main"("!{file_status}", "!{input}", "!{scheduler_state}")
 VAR
-  "!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<n>>>}" : integer;
-  "!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<i>>>}" : integer;
-  "!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<sum>>>}" : integer;
+  "!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<n>>>}" : integer;
+  "!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<i>>>}" : integer;
+  "!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<sum>>>}" : integer;
   "!pc[0]" : boolean;
   "!pc[1]" : boolean;
   "!pc[2]" : boolean;
   "!pc[3]" : boolean;
 IVAR
   "!{$(in_main#0)<$(in_havoc_input#0)<h#<input>>>}" : integer;
+  "%{file_status}#2" : integer;
   "%{scheduler_state}#2" : integer;
 DEFINE
   __d0 := TRUE;
@@ -21,189 +22,231 @@ DEFINE
   __d43 := __d41 & __d42;
   __d45 := __d43 & __d44;
   __d47 := __d45 & __d46;
-  __d218 := "!pc[1]" & __d41;
-  __d219 := __d44 & __d218;
-  __d220 := __d46 & __d219;
-  __d125 := next("!pc[0]") & next("!pc[1]");
+  __d236 := "!pc[1]" & __d41;
+  __d270 := __d44 & __d236;
+  __d271 := __d46 & __d270;
+  __d134 := next("!pc[0]") & next("!pc[1]");
   __d61 := ! next("!pc[2]");
-  __d126 := __d61 & __d125;
+  __d135 := __d61 & __d134;
   __d63 := ! next("!pc[3]");
-  __d127 := __d63 & __d126;
-  __d223 := __d127 & __d220;
-  __d115 := "!{input}" = next("!{input}");
-  __d49 := "!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<n>>>}" = next("!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<n>>>}");
-  __d48 := next("!{file_status}") = 0;
-  __d50 := __d48 & __d49;
-  __d213 := __d50 & __d115;
-  __d53 := "!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<i>>>}" = next("!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<i>>>}");
-  __d214 := __d53 & __d213;
-  __d97 := "!{scheduler_state}" = next("!{scheduler_state}");
-  __d215 := __d97 & __d214;
-  __d57 := "!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<sum>>>}" = next("!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<sum>>>}");
-  __d216 := __d57 & __d215;
-  __d198 := "!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<n>>>}" <= "!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<i>>>}";
-  __d217 := __d198 & __d216;
-  __d224 := __d217 & __d223;
-  __d119 := ! next("!pc[0]");
-  __d120 := next("!pc[1]") & __d119;
-  __d121 := __d61 & __d120;
-  __d122 := __d63 & __d121;
-  __d221 := __d122 & __d220;
-  __d207 := -1 * next("!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<sum>>>}");
-  __d208 := "!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<sum>>>}" + __d207;
-  __d209 := "!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<i>>>}" + __d208;
-  __d210 := __d209 = 0;
-  __d202 := -1 * next("!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<i>>>}");
-  __d203 := "!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<i>>>}" + __d202;
-  __d204 := __d203 = -1;
-  __d104 := "!{file_status}" = next("!{file_status}");
-  __d105 := __d49 & __d104;
-  __d178 := __d105 & __d115;
-  __d205 := __d178 & __d204;
-  __d206 := __d97 & __d205;
-  __d211 := __d206 & __d210;
-  __d199 := ! __d198;
-  __d212 := __d199 & __d211;
-  __d222 := __d212 & __d221;
-  __d225 := __d222 | __d224;
-  __d182 := "!pc[0]" & "!pc[1]";
-  __d193 := __d44 & __d182;
-  __d194 := __d46 & __d193;
-  __d59 := ! next("!pc[1]");
-  __d129 := __d59 & __d119;
-  __d130 := next("!pc[2]") & __d129;
-  __d131 := __d63 & __d130;
-  __d195 := __d131 & __d194;
-  __d179 := __d53 & __d178;
-  __d180 := __d97 & __d179;
-  __d181 := __d57 & __d180;
-  __d196 := __d181 & __d195;
-  __d188 := "!pc[2]" & __d43;
-  __d189 := __d46 & __d188;
-  __d60 := next("!pc[0]") & __d59;
-  __d135 := next("!pc[2]") & __d60;
   __d136 := __d63 & __d135;
-  __d190 := __d136 & __d189;
-  __d191 := __d181 & __d190;
-  __d183 := "!pc[2]" & __d182;
-  __d184 := __d46 & __d183;
+  __d272 := __d136 & __d271;
+  __d122 := "!{input}" = next("!{input}");
+  __d116 := "!{file_status}" = next("!{file_status}");
+  __d51 := "!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<sum>>>}" = next("!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<sum>>>}");
+  __d49 := "!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<i>>>}" = next("!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<i>>>}");
+  __d48 := "!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<n>>>}" = next("!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<n>>>}");
+  __d50 := __d48 & __d49;
+  __d52 := __d50 & __d51;
+  __d117 := __d52 & __d116;
+  __d166 := __d117 & __d122;
+  __d104 := "!{scheduler_state}" = next("!{scheduler_state}");
+  __d167 := __d104 & __d166;
+  __d273 := __d167 & __d272;
+  __d123 := "!pc[0]" & __d42;
+  __d262 := "!pc[2]" & __d123;
+  __d263 := __d46 & __d262;
+  __d126 := ! next("!pc[0]");
+  __d127 := next("!pc[1]") & __d126;
+  __d178 := next("!pc[2]") & __d127;
+  __d179 := __d63 & __d178;
+  __d266 := __d179 & __d263;
+  __d53 := next("!{file_status}") = 0;
+  __d54 := __d52 & __d53;
+  __d259 := __d54 & __d122;
+  __d260 := __d104 & __d259;
+  __d242 := "!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<n>>>}" <= "!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<i>>>}";
+  __d261 := __d242 & __d260;
+  __d267 := __d261 & __d266;
+  __d59 := ! next("!pc[1]");
+  __d60 := next("!pc[0]") & __d59;
+  __d174 := next("!pc[2]") & __d60;
+  __d175 := __d63 & __d174;
+  __d264 := __d175 & __d263;
+  __d250 := -1 * next("!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<sum>>>}");
+  __d251 := "!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<sum>>>}" + __d250;
+  __d252 := "!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<i>>>}" + __d251;
+  __d253 := __d252 = 0;
+  __d246 := -1 * next("!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<i>>>}");
+  __d247 := "!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<i>>>}" + __d246;
+  __d248 := __d247 = -1;
+  __d249 := __d48 & __d248;
+  __d254 := __d249 & __d253;
+  __d255 := __d116 & __d254;
+  __d256 := __d122 & __d255;
+  __d257 := __d104 & __d256;
+  __d243 := ! __d242;
+  __d258 := __d243 & __d257;
+  __d265 := __d258 & __d264;
+  __d268 := __d265 | __d267;
+  __d237 := "!pc[2]" & __d236;
+  __d238 := __d46 & __d237;
+  __d183 := next("!pc[2]") & __d134;
+  __d184 := __d63 & __d183;
+  __d239 := __d184 & __d238;
+  __d240 := __d167 & __d239;
+  __d171 := "!pc[0]" & "!pc[1]";
+  __d231 := "!pc[2]" & __d171;
+  __d232 := __d46 & __d231;
+  __d140 := __d59 & __d126;
+  __d188 := __d61 & __d140;
+  __d189 := next("!pc[3]") & __d188;
+  __d233 := __d189 & __d232;
+  __d234 := __d167 & __d233;
+  __d124 := __d44 & __d123;
+  __d227 := "!pc[3]" & __d124;
   __d62 := __d60 & __d61;
   __d64 := __d62 & __d63;
-  __d185 := __d64 & __d184;
-  __d186 := __d181 & __d185;
-  __d171 := next("!pc[2]") & __d125;
-  __d172 := __d63 & __d171;
-  __d116 := "!pc[0]" & __d42;
-  __d169 := "!pc[2]" & __d116;
-  __d170 := __d46 & __d169;
-  __d173 := __d170 & __d172;
-  __d160 := next("!{scheduler_state}") = "%{scheduler_state}#2";
-  __d150 := -1 * "%{scheduler_state}#2";
-  __d151 := "!{scheduler_state}" + __d150;
-  __d152 := __d151 = -1;
-  __d144 := "!{scheduler_state}" = 1;
-  __d145 := ! __d144;
-  __d154 := __d145 & __d152;
-  __d149 := "%{scheduler_state}#2" = 0;
-  __d153 := __d144 & __d149;
-  __d155 := __d153 | __d154;
-  __d156 := __d104 & __d155;
-  __d157 := __d49 & __d156;
-  __d158 := __d115 & __d157;
-  __d159 := __d53 & __d158;
-  __d161 := __d159 & __d160;
-  __d162 := __d57 & __d161;
-  __d163 := __d104 & __d162;
-  __d164 := __d49 & __d163;
-  __d165 := __d115 & __d164;
-  __d166 := __d53 & __d165;
-  __d167 := __d160 & __d166;
-  __d168 := __d57 & __d167;
-  __d175 := __d168 & __d173;
-  __d174 := __d162 & __d173;
-  __d176 := __d174 | __d175;
-  __d117 := __d44 & __d116;
-  __d118 := __d46 & __d117;
-  __d137 := __d118 & __d136;
-  __d93 := next("!{input}") = "!{$(in_main#0)<$(in_havoc_input#0)<h#<input>>>}";
-  __d106 := __d93 & __d105;
-  __d107 := __d53 & __d106;
-  __d108 := __d97 & __d107;
-  __d109 := __d57 & __d108;
+  __d228 := __d64 & __d227;
+  __d229 := __d167 & __d228;
+  __d221 := next("!pc[3]") & __d62;
+  __d220 := "!pc[3]" & __d45;
+  __d222 := __d220 & __d221;
+  __d212 := next("!{scheduler_state}") = "%{scheduler_state}#2";
+  __d201 := -1 * "%{scheduler_state}#2";
+  __d202 := "!{scheduler_state}" + __d201;
+  __d203 := __d202 = -1;
+  __d195 := "!{scheduler_state}" = 3;
+  __d196 := ! __d195;
+  __d205 := __d196 & __d203;
+  __d200 := "%{scheduler_state}#2" = 0;
+  __d204 := __d195 & __d200;
+  __d206 := __d204 | __d205;
+  __d207 := __d48 & __d206;
+  __d208 := __d49 & __d207;
+  __d209 := __d51 & __d208;
+  __d210 := __d116 & __d209;
+  __d211 := __d122 & __d210;
+  __d213 := __d211 & __d212;
+  __d214 := __d48 & __d213;
+  __d215 := __d49 & __d214;
+  __d216 := __d51 & __d215;
+  __d217 := __d116 & __d216;
+  __d218 := __d122 & __d217;
+  __d219 := __d212 & __d218;
+  __d224 := __d219 & __d222;
+  __d223 := __d213 & __d222;
+  __d225 := __d223 | __d224;
+  __d172 := __d44 & __d171;
+  __d173 := __d46 & __d172;
+  __d190 := __d173 & __d189;
+  __d145 := "!{scheduler_state}" = 2;
+  __d151 := ! __d145;
+  __d170 := __d151 & __d167;
+  __d191 := __d170 & __d190;
+  __d185 := __d173 & __d184;
+  __d86 := "!{file_status}" = 1;
+  __d149 := ! __d86;
+  __d168 := __d149 & __d167;
+  __d169 := __d145 & __d168;
+  __d186 := __d169 & __d185;
+  __d180 := __d173 & __d179;
+  __d155 := next("!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<sum>>>}") = 0;
+  __d153 := next("!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<i>>>}") = 0;
+  __d152 := next("!{$(in_main#0)<$(in_task2#2)<$(in_file_operation#0)<n>>>}") = "!{input}";
+  __d154 := __d152 & __d153;
+  __d156 := __d154 & __d155;
+  __d157 := __d116 & __d156;
+  __d158 := __d122 & __d157;
+  __d159 := __d104 & __d158;
+  __d163 := __d149 & __d159;
+  __d164 := __d86 & __d163;
+  __d165 := __d145 & __d164;
+  __d181 := __d165 & __d180;
+  __d176 := __d173 & __d175;
+  __d160 := __d86 & __d159;
+  __d161 := __d86 & __d160;
+  __d162 := __d145 & __d161;
+  __d177 := __d162 & __d176;
+  __d182 := __d177 | __d181;
+  __d187 := __d182 | __d186;
+  __d192 := __d187 | __d191;
+  __d125 := __d46 & __d124;
+  __d137 := __d125 & __d136;
+  __d102 := next("!{input}") = "!{$(in_main#0)<$(in_havoc_input#0)<h#<input>>>}";
+  __d118 := __d102 & __d117;
+  __d119 := __d104 & __d118;
   __d75 := "!{scheduler_state}" = 0;
-  __d88 := ! __d75;
-  __d113 := __d88 & __d109;
+  __d95 := ! __d75;
+  __d120 := __d95 & __d119;
   __d73 := "!{$(in_main#0)<$(in_havoc_input#0)<h#<input>>>}" <= 64;
   __d72 := -64 <= "!{$(in_main#0)<$(in_havoc_input#0)<h#<input>>>}";
   __d74 := __d72 & __d73;
-  __d114 := __d74 & __d113;
-  __d138 := __d114 & __d137;
-  __d132 := __d118 & __d131;
+  __d121 := __d74 & __d120;
+  __d138 := __d121 & __d137;
+  __d128 := __d61 & __d127;
+  __d129 := __d63 & __d128;
+  __d130 := __d125 & __d129;
+  __d100 := next("!{file_status}") = "%{file_status}#2";
+  __d89 := "%{file_status}#2" = 1;
   __d78 := 32 <= "!{$(in_main#0)<$(in_havoc_input#0)<h#<input>>>}";
   __d79 := ! __d78;
   __d76 := "!{$(in_main#0)<$(in_havoc_input#0)<h#<input>>>}" <= 0;
   __d77 := ! __d76;
   __d80 := __d77 & __d79;
-  __d85 := ! __d80;
-  __d110 := __d85 & __d109;
-  __d111 := __d75 & __d110;
-  __d112 := __d74 & __d111;
-  __d133 := __d112 & __d132;
-  __d123 := __d118 & __d122;
-  __d99 := next("!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<sum>>>}") = 0;
-  __d95 := next("!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<i>>>}") = 0;
-  __d91 := next("!{$(in_main#0)<$(in_task1#1)<$(in_file_operation#0)<n>>>}") = "!{$(in_main#0)<$(in_havoc_input#0)<h#<input>>>}";
-  __d90 := next("!{file_status}") = 1;
-  __d92 := __d90 & __d91;
-  __d94 := __d92 & __d93;
-  __d96 := __d94 & __d95;
-  __d98 := __d96 & __d97;
-  __d100 := __d98 & __d99;
-  __d101 := __d80 & __d100;
-  __d102 := __d75 & __d101;
-  __d103 := __d74 & __d102;
-  __d124 := __d103 & __d123;
-  __d134 := __d124 | __d133;
-  __d139 := __d134 | __d138;
+  __d91 := __d80 & __d89;
+  __d88 := "!{file_status}" = "%{file_status}#2";
+  __d83 := ! __d80;
+  __d90 := __d83 & __d88;
+  __d92 := __d90 | __d91;
+  __d97 := __d48 & __d92;
+  __d98 := __d49 & __d97;
+  __d99 := __d51 & __d98;
+  __d101 := __d99 & __d100;
+  __d103 := __d101 & __d102;
+  __d105 := __d103 & __d104;
+  __d108 := __d48 & __d105;
+  __d109 := __d49 & __d108;
+  __d110 := __d51 & __d109;
+  __d111 := __d100 & __d110;
+  __d112 := __d102 & __d111;
+  __d113 := __d104 & __d112;
+  __d114 := __d75 & __d113;
+  __d115 := __d74 & __d114;
+  __d132 := __d115 & __d130;
+  __d106 := __d75 & __d105;
+  __d107 := __d74 & __d106;
+  __d131 := __d107 & __d130;
+  __d133 := __d131 | __d132;
+  __d139 := __d133 | __d138;
   __d65 := __d47 & __d64;
-  __d55 := next("!{scheduler_state}") = 0;
-  __d51 := next("!{input}") = 0;
-  __d52 := __d50 & __d51;
-  __d54 := __d52 & __d53;
+  __d57 := next("!{scheduler_state}") = 0;
+  __d55 := next("!{input}") = 0;
   __d56 := __d54 & __d55;
   __d58 := __d56 & __d57;
   __d66 := __d58 & __d65;
-  __d143 := __d66 | __d139;
-  __d177 := __d143 | __d176;
-  __d187 := __d177 | __d186;
-  __d192 := __d187 | __d191;
-  __d197 := __d192 | __d196;
-  __d226 := __d197 | __d225;
+  __d144 := __d66 | __d139;
+  __d193 := __d144 | __d192;
+  __d226 := __d193 | __d225;
+  __d230 := __d226 | __d229;
+  __d235 := __d230 | __d234;
+  __d241 := __d235 | __d240;
+  __d269 := __d241 | __d268;
+  __d274 := __d269 | __d273;
 INIT __d47;
-TRANS __d226;
+TRANS __d274;
 
 MODULE Globals
 VAR
   "file_status" : integer;
   "input" : integer;
   "scheduler_state" : integer;
-
--- generated timing annotations
 VAR schedule_clock: clock;
 INIT (schedule_clock = 0)
+INIT ("scheduler_state" = 0)
 TRANS case
   (schedule_clock = f'1/1) : (next(schedule_clock) = 0);
   TRUE : (next(schedule_clock) = schedule_clock);
 esac
 INVAR (TRUE -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'1/1)))
-INVAR (("scheduler_state" = 0) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'0/1)))
-INVAR (("scheduler_state" = 1) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'1/1)))
-JUSTICE ("scheduler_state" = 0)
-JUSTICE ("scheduler_state" = 1)
--- manually added timing annotations
-URGENT "scheduler_state" = 0
+INVAR (("scheduler_state" = 0) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'1/10)))
+INVAR (("scheduler_state" = 1) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'3/5)))
+INVAR (("scheduler_state" = 2) -> ((f'1/2 <= schedule_clock) & (schedule_clock <= f'3/5)))
+INVAR (("scheduler_state" = 3) -> ((f'1/2 <= schedule_clock) & (schedule_clock <= f'1/1)))
 
--- redefinitions of macros from C file for use in properties
+JUSTICE ("scheduler_state" = 0)
+JUSTICE ("scheduler_state" = 3)
+
 DEFINE
   OPEN := 1;
   CLOSED := 0;
@@ -219,16 +262,19 @@ LTLSPEC
 
 -- -------------------- bounded properties --------------------
 LTLSPEC -- too restrictive property
-  G("file_status" = OPEN -> F[0,0.5]("file_status" = CLOSED))
+  G("file_status" = OPEN -> F[0,0.3]("file_status" = CLOSED))
+
+LTLSPEC -- demonstrates that the property above is not only false through init behavior
+  F(G("file_status" = OPEN -> F[0,0.3]("file_status" = CLOSED)))
 
 -- #################### TRUE PROPERTIES ####################
 
 -- -------------------- unbounded properties --------------------
-LTLSPEC -- from Amilon, Lidström, Gurov's paper
-  G("file_status" = OPEN -> F("file_status" = CLOSED))
-
 LTLSPEC -- demonstrates that the "bounded havoc" function works
   F(G(-(2*N) <= "file_status" & "file_status" <= (2*N)))
+
+LTLSPEC -- from Amilon, Lidström, Gurov's paper
+  G("file_status" = OPEN -> F("file_status" = CLOSED))
 
 -- -------------------- bounded properties --------------------
 LTLSPEC -- bounded version of the superjacent property
