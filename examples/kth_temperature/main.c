@@ -1,42 +1,10 @@
 unsigned short in_kelvin; // integer type only matters if bit-vectors are used
 int out_celsius;
 
-
 /*
  * Adapted from the temperature example from
  * Amilon, Lidström, Gurov: 10.1007/978-3-031-19849-6_2
- * with a "heater" that is triggered when temperature is below freezing
  */
-
-/*
--- #################### FALSE PROPERTIES ####################
-
--- by disproving these properties, we know that the implications below does not hold vacuously
--- the counterexamples demonstrate that there are runs where the temperature is eventually
--- always positive/negative
--- I have not found a provable analogue to this in LTL
-LTLSPEC G(!G("in_kelvin" > 273))
-LTLSPEC G(!G("in_kelvin" < 273))
-
--- #################### TRUE PROPERTIES ####################
-
--- unbounded properties
-LTLSPEC
-  G(G("in_kelvin" > 273) -> F(G("out_celsius" > 0)))
-LTLSPEC
-  G(G("in_kelvin" < 273) -> F(G("out_celsius" < 0)))
-
---terminating bounded
-LTLSPEC
-  G(G[0,1]("in_kelvin" > 273) -> F("out_celsius" > 0))
-LTLSPEC
-  G(G[0,1]("in_kelvin" < 273) -> F("out_celsius" < 0))
-
-LTLSPEC
-  G(G("in_kelvin" > 273) -> F[0,1](G("out_celsius" > 0)))
-LTLSPEC
-  G(G("in_kelvin" < 273) -> F[0,1](G("out_celsius" < 0)))
-*/
 
 int convert_temp(int k) {
     int res = k;
@@ -44,7 +12,7 @@ int convert_temp(int k) {
     return res;
 }
 
-/* CHRONOS_SCHEDULE
+/* SCHEDULE
 hyperperiod: 1;
 task1: [0,0];
 */
@@ -68,9 +36,14 @@ void task1() {
     }
 }
 
+void havoc_input() {
+    havoc(in_kelvin);
+    assume(in_kelvin >= 0);
+}
+
 int main() {
     while ( 1 ) {
-        havoc(in_kelvin);
+        havoc_input();
         task1();
         scheduler();
     }
