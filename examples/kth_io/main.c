@@ -5,7 +5,6 @@
 /*
  * Adapted from the IO example from
  * Amilon, Lidström, Gurov: 10.1007/978-3-031-19849-6_2
- * with a "heater" that is triggered when temperature is below freezing
  */
 
 /* CHRONOS_SCHEDULE
