@@ -131,12 +131,12 @@ VAR schedule_clock: clock;
 INIT (schedule_clock = 0)
 INIT ("scheduler_state" = 0)
 TRANS case
-  (schedule_clock = f'1/1) : (next(schedule_clock) = 0);
+  (schedule_clock = f'2/1) : (next(schedule_clock) = 0);
   TRUE : (next(schedule_clock) = schedule_clock);
 esac
-INVAR (TRUE -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'1/1)))
+INVAR (TRUE -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'2/1)))
 INVAR (("scheduler_state" = 0) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'0/1)))
-INVAR (("scheduler_state" = 1) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'1/1)))
+INVAR (("scheduler_state" = 1) -> ((f'0/1 <= schedule_clock) & (schedule_clock <= f'2/1)))
 URGENT ("scheduler_state" = 0)
 JUSTICE ("scheduler_state" = 0)
 JUSTICE ("scheduler_state" = 1)
@@ -161,27 +161,27 @@ LTLSPEC
 
 --terminating bounded
 LTLSPEC
-  G(G[0,1]("in_kelvin" > 273) -> F("out_celsius" > 0))
+  G(G[0,2]("in_kelvin" > 273) -> F("out_celsius" > 0))
 LTLSPEC
-  G(G[0,1]("in_kelvin" < 273) -> F("out_celsius" < 0))
+  G(G[0,2]("in_kelvin" < 273) -> F("out_celsius" < 0))
 LTLSPEC -- bounded havoc check
   G[1,+oo)("in_kelvin" >= 0)
 
 LTLSPEC
-  G(G("in_kelvin" > 273) -> F[0,1](G("out_celsius" > 0)))
+  G(G("in_kelvin" > 273) -> F[0,2](G("out_celsius" > 0)))
 LTLSPEC
-  G(G("in_kelvin" < 273) -> F[0,1](G("out_celsius" < 0)))
+  G(G("in_kelvin" < 273) -> F[0,2](G("out_celsius" < 0)))
 
 -- potentially non terminating
 LTLSPEC
-  G(G[0,10]("in_kelvin" > 273) -> F[0,1](G[0,9]("out_celsius" > 0)))
+  G(G[0,10]("in_kelvin" > 273) -> F[0,2](G[0,9]("out_celsius" > 0)))
 LTLSPEC
   G("in_kelvin" < 273 -> F("out_celsius" < 0))
 LTLSPEC
   F(G("in_kelvin" >= 0))
 
 LTLSPEC -- potentially false??
-  G(G[0,1]("in_kelvin" < 273) -> F[0,1](G("out_celsius" < 0)))
+  G(G[0,2]("in_kelvin" < 273) -> F[0,2](G("out_celsius" < 0)))
 
 
 MODULE main

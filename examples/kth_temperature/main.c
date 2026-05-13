@@ -13,7 +13,7 @@ int convert_temp(int k) {
 }
 
 /* SCHEDULE
-hyperperiod: 1;
+hyperperiod: 2;
 task1: [0,0];
 */
 
