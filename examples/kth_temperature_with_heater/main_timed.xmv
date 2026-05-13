@@ -187,9 +187,9 @@ VAR
   "out_celsius" : integer;
   "scheduler_state" : integer;
 
--- Generated Scheduler timing annotation:
 VAR schedule_clock: clock;
 INIT (schedule_clock = 0)
+INIT ("scheduler_state" = 0)
 TRANS case
   (schedule_clock = f'2/1) : (next(schedule_clock) = 0);
   TRUE : (next(schedule_clock) = schedule_clock);
@@ -217,12 +217,10 @@ LTLSPEC -- disproving this shows that implications below are not vacuous
 LTLSPEC -- too tight
   G(G[0,1]("out_celsius") < 0 -> F[0,1]("heater_on"))
 
-
 -- #################### TRUE PROPERTIES ####################
 -- bounded
 LTLSPEC
   G(G[0,1]("out_celsius") < 0 -> F[0,2]("heater_on"))
-
 
 MODULE main
 VAR

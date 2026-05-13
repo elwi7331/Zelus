@@ -22,6 +22,7 @@ heater_task: [0.5,0.5];
 conversion_task: [1,1];
 */
 
+// chronos annotation
 unsigned int scheduler_state = 0;
 void scheduler() {
     if ( scheduler_state == 5 ) {
@@ -31,6 +32,7 @@ void scheduler() {
     }
 }
 
+// kratos annotation
 void init() {
     assume(
       scheduler_state == 0 &&
