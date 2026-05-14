@@ -222,6 +222,21 @@ LTLSPEC -- too tight
 LTLSPEC
   G(G[0,1]("out_celsius") < 0 -> F[0,2]("heater_on"))
 
+-- #################### TRUE PROPERTIES FROM SIMPLE EXAMPLE ####################
+LTLSPEC
+  G(G("in_kelvin" > 273) -> F(G("out_celsius" > 0)))
+LTLSPEC
+  G(G("in_kelvin" < 273) -> F(G("out_celsius" < 0)))
+LTLSPEC
+  G(G("in_kelvin" > 273) -> F[0,2](G("out_celsius" > 0)))
+LTLSPEC
+  G(G("in_kelvin" < 273) -> F[0,2](G("out_celsius" < 0)))
+LTLSPEC
+  G(G[0,2]("in_kelvin" > 273) -> F("out_celsius" > 0))
+LTLSPEC
+  G(G[0,2]("in_kelvin" < 273) -> F("out_celsius" < 0))
+
+
 MODULE main
 VAR
   globals : Globals;
