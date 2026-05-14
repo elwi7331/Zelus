@@ -1,0 +1,242 @@
+Script started on Thu May 14 13:52:57 2026
+Command: ../../scripts/nuXmv -int main_discrete.xmv
+*** This is nuXmv 2.1.0 (compiled on Thu Nov 28 18:33:21 2024)
+*** Copyright (c) 2014-2024, Fondazione Bruno Kessler
+*** For more information on nuXmv see https://nuxmv.fbk.eu
+*** or email to <nuxmv@fbk.eu>.
+*** Please report bugs at Please report bugs to <nusmv-users@fbk.eu>
+*** (click on "Login Anonymously" to access)
+*** Alternatively write to <nuxmv@fbk.eu>.
+
+*** This version of nuXmv is linked to NuSMV 2.7.0.
+*** For more information on NuSMV see <http://nusmv.fbk.eu>
+*** or email to <nusmv-users@fbk.eu>.
+*** Copyright (C) 2010-2024, Fondazione Bruno Kessler
+
+*** This version of nuXmv is linked to the CUDD library version 2.4.1
+*** Copyright (c) 1995-2004, Regents of the University of Colorado
+
+*** This version of nuXmv is linked to the MiniSat SAT solver. 
+*** See http://minisat.se/MiniSat.html
+*** Copyright (c) 2003-2006, Niklas Een, Niklas Sorensson
+*** Copyright (c) 2007-2010, Niklas Sorensson
+
+*** This version of nuXmv is linked to MathSAT
+*** Copyright (C) 2009-2019 by Fondazione Bruno Kessler
+*** Copyright (C) 2009-2019 by University of Trento and others
+*** See http://mathsat.fbk.eu
+
+nuXmv > go_time
+unknown command 'go_time'
+nuXmv > go_msat
+nuXmv > show_property
+**** PROPERTY LIST [ Type, Status, Counter-example Number, Name ] ****
+--------------------------  PROPERTY LIST  -------------------------
+000 : G !( G "in_kelvin" > 273) IN globals
+  [LTL            Unchecked      N/A    N/A]
+001 : G !( G "in_kelvin" < 273) IN globals
+  [LTL            Unchecked      N/A    N/A]
+002 : G ( G "in_kelvin" > 273 ->  F ( G "out_celsius" > 0)) IN globals
+  [LTL            Unchecked      N/A    N/A]
+003 : G ( G "in_kelvin" < 273 ->  F ( G "out_celsius" < 0)) IN globals
+  [LTL            Unchecked      N/A    N/A]
+004 : F ( G "in_kelvin" >= 0) IN globals
+  [LTL            Unchecked      N/A    N/A]
+nuXmv > check_ltlspec_[9G[Ktime
+elapse: 0.01 seconds, total: 0.01 seconds
+nuXmv > check_ltlspec_ic3 -n 0
+-- no proof or counterexample found with bound 0
+-- no proof or counterexample found with bound 1
+-- no proof or counterexample found with bound 2
+-- LTL specification  G !( G "in_kelvin" > 273) IN globals is false
+-- as demonstrated by the following execution sequence
+Trace Description: IC3 smt counterexample 
+Trace Type: Counterexample 
+  -> State: 1.1 <-
+    globals."in_kelvin" = 274
+    globals."out_celsius" = 1
+    globals."scheduler_state" = 0
+    entry."!{$(in_main#0)<main.return>}" = 0
+    entry."!pc[0]" = FALSE
+    entry."!pc[1]" = FALSE
+    entry."!pc[2]" = FALSE
+  -> Input: 1.2 <-
+    entry."!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}" = 9
+    entry."!{$(in_main#0)<$(in_task1#1)<$temp.1>>}" = 13
+    entry."!{$(in_main#0)<$(in_task1#1)<$tmp>>}" = 12
+    entry."%{$(in_main#0)<main.return>}#1" = 0
+    entry."%{$(in_main#0)<$(in_task1#1)<$temp.1>>}#3" = 11
+    entry."%{$(in_main#0)<$(in_task1#1)<$tmp>>}#3" = 10
+    entry."%{out_celsius}#2" = 8
+    entry."%{scheduler_state}#2" = 7
+  -> State: 1.2 <-
+    globals."in_kelvin" = 0
+    globals."out_celsius" = 0
+    entry."!pc[0]" = TRUE
+  -> Input: 1.3 <-
+    entry."!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}" = 274
+    entry."!{$(in_main#0)<$(in_task1#1)<$temp.1>>}" = 16
+    entry."!{$(in_main#0)<$(in_task1#1)<$tmp>>}" = 15
+    entry."%{$(in_main#0)<main.return>}#1" = 17
+    entry."%{$(in_main#0)<$(in_task1#1)<$temp.1>>}#3" = 1
+    entry."%{$(in_main#0)<$(in_task1#1)<$tmp>>}#3" = 1
+    entry."%{out_celsius}#2" = 1
+    entry."%{scheduler_state}#2" = 14
+  -> State: 1.3 <-
+    globals."in_kelvin" = 274
+    globals."out_celsius" = 1
+    entry."!pc[0]" = FALSE
+    entry."!pc[1]" = TRUE
+  -> Input: 1.4 <-
+    entry."!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}" = 0
+    entry."!{$(in_main#0)<$(in_task1#1)<$temp.1>>}" = 0
+    entry."!{$(in_main#0)<$(in_task1#1)<$tmp>>}" = 0
+    entry."%{$(in_main#0)<main.return>}#1" = 0
+    entry."%{$(in_main#0)<$(in_task1#1)<$temp.1>>}#3" = 0
+    entry."%{$(in_main#0)<$(in_task1#1)<$tmp>>}#3" = 0
+    entry."%{out_celsius}#2" = 0
+    entry."%{scheduler_state}#2" = 1
+  -- Loop starts here
+  -> State: 1.4 <-
+    globals."scheduler_state" = 1
+    entry."!pc[1]" = FALSE
+    entry."!pc[2]" = TRUE
+  -> Input: 1.5 <-
+    entry."%{scheduler_state}#2" = 0
+  -> State: 1.5 <-
+    entry."!pc[0]" = TRUE
+    entry."!pc[2]" = FALSE
+  -> Input: 1.6 <-
+    entry."!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}" = 274
+    entry."%{out_celsius}#2" = 1
+  -> State: 1.6 <-
+    entry."!pc[0]" = FALSE
+    entry."!pc[1]" = TRUE
+  -> Input: 1.7 <-
+    entry."!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}" = 0
+    entry."%{out_celsius}#2" = 0
+  -> State: 1.7 <-
+    globals."scheduler_state" = 0
+    entry."!pc[1]" = FALSE
+    entry."!pc[2]" = TRUE
+  -> Input: 1.8 <-
+  -> State: 1.8 <-
+    entry."!pc[0]" = TRUE
+    entry."!pc[2]" = FALSE
+  -> Input: 1.9 <-
+    entry."!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}" = 274
+    entry."%{$(in_main#0)<$(in_task1#1)<$temp.1>>}#3" = 1
+    entry."%{$(in_main#0)<$(in_task1#1)<$tmp>>}#3" = 1
+    entry."%{out_celsius}#2" = 1
+  -> State: 1.9 <-
+    entry."!pc[0]" = FALSE
+    entry."!pc[1]" = TRUE
+  -> Input: 1.10 <-
+    entry."!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}" = 0
+    entry."%{$(in_main#0)<$(in_task1#1)<$temp.1>>}#3" = 0
+    entry."%{$(in_main#0)<$(in_task1#1)<$tmp>>}#3" = 0
+    entry."%{out_celsius}#2" = 0
+    entry."%{scheduler_state}#2" = 1
+  -> State: 1.10 <-
+    globals."scheduler_state" = 1
+    entry."!pc[1]" = FALSE
+    entry."!pc[2]" = TRUE
+nuXmv > time
+elapse: 0.04 seconds, total: 0.05 seconds
+nuXmv > timecheck_ltlspec_ic3 -n 0[K1
+-- no proof or counterexample found with bound 0
+-- no proof or counterexample found with bound 1
+-- no proof or counterexample found with bound 2
+-- no proof or counterexample found with bound 3
+-- no proof or counterexample found with bound 4
+-- no proof or counterexample found with bound 5
+-- no proof or counterexample found with bound 6
+-- LTL specification  G !( G "in_kelvin" < 273) IN globals is false
+-- as demonstrated by the following execution sequence
+Trace Description: IC3 smt counterexample 
+Trace Type: Counterexample 
+  -> State: 2.1 <-
+    globals."in_kelvin" = 273
+    globals."out_celsius" = -1
+    globals."scheduler_state" = 0
+    entry."!{$(in_main#0)<main.return>}" = 0
+    entry."!pc[0]" = FALSE
+    entry."!pc[1]" = FALSE
+    entry."!pc[2]" = FALSE
+  -> Input: 2.2 <-
+    entry."!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}" = 9
+    entry."!{$(in_main#0)<$(in_task1#1)<$temp.1>>}" = 13
+    entry."!{$(in_main#0)<$(in_task1#1)<$tmp>>}" = 12
+    entry."%{$(in_main#0)<main.return>}#1" = 0
+    entry."%{$(in_main#0)<$(in_task1#1)<$temp.1>>}#3" = 11
+    entry."%{$(in_main#0)<$(in_task1#1)<$tmp>>}#3" = 10
+    entry."%{out_celsius}#2" = 8
+    entry."%{scheduler_state}#2" = 7
+  -> State: 2.2 <-
+    globals."in_kelvin" = 0
+    globals."out_celsius" = 0
+    entry."!pc[0]" = TRUE
+  -> Input: 2.3 <-
+    entry."!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}" = 272
+    entry."!{$(in_main#0)<$(in_task1#1)<$temp.1>>}" = 16
+    entry."!{$(in_main#0)<$(in_task1#1)<$tmp>>}" = 15
+    entry."%{$(in_main#0)<main.return>}#1" = 17
+    entry."%{$(in_main#0)<$(in_task1#1)<$temp.1>>}#3" = -1
+    entry."%{$(in_main#0)<$(in_task1#1)<$tmp>>}#3" = -1
+    entry."%{out_celsius}#2" = -1
+    entry."%{scheduler_state}#2" = 14
+  -- Loop starts here
+  -> State: 2.3 <-
+    globals."in_kelvin" = 272
+    globals."out_celsius" = -1
+    entry."!pc[0]" = FALSE
+    entry."!pc[1]" = TRUE
+  -> Input: 2.4 <-
+    entry."!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}" = 0
+    entry."!{$(in_main#0)<$(in_task1#1)<$temp.1>>}" = 0
+    entry."!{$(in_main#0)<$(in_task1#1)<$tmp>>}" = 0
+    entry."%{$(in_main#0)<main.return>}#1" = 0
+    entry."%{$(in_main#0)<$(in_task1#1)<$temp.1>>}#3" = 0
+    entry."%{$(in_main#0)<$(in_task1#1)<$tmp>>}#3" = 0
+    entry."%{out_celsius}#2" = 0
+    entry."%{scheduler_state}#2" = 1
+  -> State: 2.4 <-
+    globals."scheduler_state" = 1
+    entry."!pc[1]" = FALSE
+    entry."!pc[2]" = TRUE
+  -> Input: 2.5 <-
+    entry."%{scheduler_state}#2" = 0
+  -> State: 2.5 <-
+    entry."!pc[0]" = TRUE
+    entry."!pc[2]" = FALSE
+  -> Input: 2.6 <-
+    entry."%{out_celsius}#2" = -1
+  -> State: 2.6 <-
+    globals."in_kelvin" = 0
+    entry."!pc[0]" = FALSE
+    entry."!pc[1]" = TRUE
+  -> Input: 2.7 <-
+    entry."%{out_celsius}#2" = 0
+  -> State: 2.7 <-
+    globals."scheduler_state" = 0
+    entry."!pc[1]" = FALSE
+    entry."!pc[2]" = TRUE
+  -> Input: 2.8 <-
+  -> State: 2.8 <-
+    entry."!pc[0]" = TRUE
+    entry."!pc[2]" = FALSE
+  -> Input: 2.9 <-
+    entry."!{$(in_main#0)<$(in_havoc_input#0)<h#<in_kelvin>>>}" = 272
+    entry."%{$(in_main#0)<$(in_task1#1)<$temp.1>>}#3" = -1
+    entry."%{$(in_main#0)<$(in_task1#1)<$tmp>>}#3" = -1
+    entry."%{out_celsius}#2" = -1
+  -> State: 2.9 <-
+    globals."in_kelvin" = 272
+    entry."!pc[0]" = FALSE
+    entry."!pc[1]" = TRUE
+nuXmv > time
+elapse: 0.09 seconds, total: 0.13 seconds
+nuXmv > u[Kquit
+
+Command exit status: 0
+Script done on Thu May 14 13:53:31 2026
