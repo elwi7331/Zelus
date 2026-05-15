@@ -1,0 +1,98 @@
+Script started on Fri May 15 13:55:46 2026
+Command: ../../scripts/nuXmv -int -time main_timed.xmv
+*** This is nuXmv 2.1.0 (compiled on Thu Nov 28 18:33:21 2024)
+*** Copyright (c) 2014-2024, Fondazione Bruno Kessler
+*** For more information on nuXmv see https://nuxmv.fbk.eu
+*** or email to <nuxmv@fbk.eu>.
+*** Please report bugs at Please report bugs to <nusmv-users@fbk.eu>
+*** (click on "Login Anonymously" to access)
+*** Alternatively write to <nuxmv@fbk.eu>.
+
+*** This version of nuXmv is linked to NuSMV 2.7.0.
+*** For more information on NuSMV see <http://nusmv.fbk.eu>
+*** or email to <nusmv-users@fbk.eu>.
+*** Copyright (C) 2010-2024, Fondazione Bruno Kessler
+
+*** This version of nuXmv is linked to the CUDD library version 2.4.1
+*** Copyright (c) 1995-2004, Regents of the University of Colorado
+
+*** This version of nuXmv is linked to the MiniSat SAT solver. 
+*** See http://minisat.se/MiniSat.html
+*** Copyright (c) 2003-2006, Niklas Een, Niklas Sorensson
+*** Copyright (c) 2007-2010, Niklas Sorensson
+
+*** This version of nuXmv is linked to MathSAT
+*** Copyright (C) 2009-2019 by Fondazione Bruno Kessler
+*** Copyright (C) 2009-2019 by University of Trento and others
+*** See http://mathsat.fbk.eu
+
+nuXmv > go_time
+
+file main_timed.xmv: line 180: at token "G": syntax error
+nuXmv > show[Kgo_time
+nuXmv > show_property
+**** PROPERTY LIST [ Type, Status, Counter-example Number, Name ] ****
+--------------------------  PROPERTY LIST  -------------------------
+000 : G !( G "in_kelvin" > 273) IN globals
+  [LTL            Unchecked      N/A    N/A]
+001 : G !( G "in_kelvin" < 273) IN globals
+  [LTL            Unchecked      N/A    N/A]
+002 : G ( G [0,2] "in_kelvin" < 273 ->  F [0,2]  G "out_celsius" < 0) IN globals
+  [LTL            Unchecked      N/A    N/A]
+003 : G ( G "in_kelvin" > 273 ->  F ( G "out_celsius" > 0)) IN globals
+  [LTL            Unchecked      N/A    N/A]
+004 : G ( G "in_kelvin" < 273 ->  F ( G "out_celsius" < 0)) IN globals
+  [LTL            Unchecked      N/A    N/A]
+005 : F ( G "in_kelvin" >= 0) IN globals
+  [LTL            Unchecked      N/A    N/A]
+006 : G ( G [0,2] "in_kelvin" > 273 ->  F "out_celsius" > 0) IN globals
+  [LTL            Unchecked      N/A    N/A]
+007 : G ( G [0,2] "in_kelvin" < 273 ->  F "out_celsius" < 0) IN globals
+  [LTL            Unchecked      N/A    N/A]
+008 : G [1,+oo) "in_kelvin" >= 0 IN globals
+  [LTL            Unchecked      N/A    N/A]
+009 : G ( G "in_kelvin" > 273 ->  F [0,2]  G "out_celsius" > 0) IN globals
+  [LTL            Unchecked      N/A    N/A]
+010 : G ( G "in_kelvin" < 273 ->  F [0,2]  G "out_celsius" < 0) IN globals
+  [LTL            Unchecked      N/A    N/A]
+011 : G ( G [0,2] "in_kelvin" < 273 ->  F [0,2] "out_celsius" < 0) IN globals
+  [LTL            Unchecked      N/A    N/A]
+012 : G ( G [0,10] "in_kelvin" > 273 ->  F [0,2]  G [0,9] "out_celsius" > 0) IN globals
+  [LTL            Unchecked      N/A    N/A]
+013 : G ("in_kelvin" < 273 ->  F "out_celsius" < 0) IN globals
+  [LTL            Unchecked      N/A    N/A]
+014 : F ( G "in_kelvin" >= 0) IN globals
+  [LTL            Unchecked      N/A    N/A]
+nuXmv > time
+elapse: 0.01 seconds, total: 0.01 seconds
+nuXmv > timed_check_ltlspec -n 11
+-- no proof or counterexample found with bound 0
+-- no proof or counterexample found with bound 1
+-- no proof or counterexample found with bound 2
+-- no proof or counterexample found with bound 3
+-- no proof or counterexample found with bound 4
+-- no proof or counterexample found with bound 5
+-- no proof or counterexample found with bound 6
+-- no proof or counterexample found with bound 7
+-- no proof or counterexample found with bound 8
+-- no proof or counterexample found with bound 9
+-- no proof or counterexample found with bound 10
+-- no proof or counterexample found with bound 11
+-- no proof or counterexample found with bound 12
+-- no proof or counterexample found with bound 13
+-- no proof or counterexample found with bound 14
+-- no proof or counterexample found with bound 15
+-- no proof or counterexample found with bound 16
+-- no proof or counterexample found with bound 17
+-- no proof or counterexample found with bound 18
+-- no proof or counterexample found with bound 19
+-- no proof or counterexample found with bound 20
+-- no proof or counterexample found with bound 21
+-- no proof or counterexample found with bound 22
+-- LTL specification  G ( G [0,2] "in_kelvin" < 273 ->  F [0,2] "out_celsius" < 0) IN globals is true
+nuXmv > time
+elapse: 3.65 seconds, total: 3.66 seconds
+nuXmv > quit
+
+Command exit status: 0
+Script done on Fri May 15 14:00:40 2026

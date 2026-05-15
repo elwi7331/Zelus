@@ -146,8 +146,11 @@ JUSTICE ("scheduler_state" = 1)
 -- by disproving these properties, we know that the implications below does not hold vacuously
 -- the counterexamples demonstrate that there are runs where the temperature is eventually
 -- always positive/negative
-LTLSPEC G(!G("in_kelvin" > 273))
-LTLSPEC G(!G("in_kelvin" < 273))
+LTLSPEC G(!G("in_kelvin" > 273)) -- ~ 2027 seconds
+LTLSPEC G(!G("in_kelvin" < 273)) -- ~ 2300 seconds
+
+LTLSPEC -- proven false in ~5800 seconds
+  G(G[0,2]("in_kelvin" < 273) -> F[0,2](G("out_celsius" < 0)))
 
 -- #################### TRUE PROPERTIES ####################
 
@@ -171,18 +174,14 @@ LTLSPEC
   G(G("in_kelvin" > 273) -> F[0,2](G("out_celsius" > 0)))
 LTLSPEC
   G(G("in_kelvin" < 273) -> F[0,2](G("out_celsius" < 0)))
+LTLSPEC
+  G(G[0,2]("in_kelvin" < 273) -> F[0,2]("out_celsius" < 0))
 
 -- potentially non terminating
 LTLSPEC
   G(G[0,10]("in_kelvin" > 273) -> F[0,2](G[0,9]("out_celsius" > 0)))
 LTLSPEC
   G("in_kelvin" < 273 -> F("out_celsius" < 0))
-LTLSPEC
-  F(G("in_kelvin" >= 0))
-
-LTLSPEC -- potentially false??
-  G(G[0,2]("in_kelvin" < 273) -> F[0,2](G("out_celsius" < 0)))
-
 
 MODULE main
 VAR
